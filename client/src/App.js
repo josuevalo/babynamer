@@ -1,7 +1,17 @@
+import { useState } from 'react'
+// import Cookies from 'universal-cookie';
 import "./App.css";
+import axios from 'axios'
 
-function App() {
-  return <></>;
-}
+// const cookies = new Cookies();
 
-export default App;
+export default function App() {
+const { state, setState } = useState('')
+
+
+  return ( 
+ <div className='App'>
+   Babynamer
+ </div>
+
+  )};
