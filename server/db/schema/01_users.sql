@@ -5,4 +5,5 @@ CREATE TABLE users (
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL,
   baby_sex TEXT NOT NULL,
+  due_date DATE NOT NULL
 );
