@@ -5,6 +5,7 @@ import "./App.css";
 import axios from "axios";
 import Navbar from "./components/Navbar";
 import Home from './Home'
+import BabyName from "./BabyName";
 
 // const cookies = new Cookies();
 
@@ -15,10 +16,9 @@ export default function App() {
     <BrowserRouter>
       <div className="App">
         <Navbar />
-        Babynamer
-          <Link to="/">Home</Link> | <Link to="/expenses">Expenses</Link>
         <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/:username" element={<BabyName />} />
         </Routes>
       </div>
     </BrowserRouter>
