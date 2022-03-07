@@ -3,5 +3,5 @@ CREATE TABLE votes (
   id SERIAL PRIMARY KEY NOT NULL,
   suggestion_id INTEGER REFERENCES suggestions(id) ON DELETE CASCADE,
   voter_id INTEGER REFERENCES voters(id) ON DELETE CASCADE,
-  isUpVote BOOLEAN
+  is_up_vote BOOLEAN
 );
