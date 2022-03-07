@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+      "go": "nodemon server.js",
+      "start": "node server.js",
+      "db:reset": "node bin/resetdb.js"
   },
   "author": "Josue Arevalo",
   "license": "ISC",
