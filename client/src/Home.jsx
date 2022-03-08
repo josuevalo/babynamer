@@ -48,11 +48,10 @@ export default function Home() {
           New Member
         </Button>
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Subscribe</DialogTitle>
+          <DialogTitle>Register</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              To subscribe to this website, please enter your email address
-              here. We will send updates occasionally.
+              Please register so we can keep track of the name suggestions for you!
             </DialogContentText>
             <TextField
               autoFocus
