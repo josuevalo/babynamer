@@ -46,7 +46,7 @@ export default function Home() {
   return (
     <main className="home">
       <h2>Welcome to babynamer!</h2>
-      <h3>Are you:</h3>
+      <h3>Do you want to:</h3>
 
 
 
@@ -80,7 +80,7 @@ export default function Home() {
 
 <br></br>
 
-
+<h3>Or Are You a</h3>
 
       <div>
         <Button variant="outlined" onClick={handleOpen}>
