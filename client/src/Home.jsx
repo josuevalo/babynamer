@@ -27,9 +27,14 @@ const babyOptions = [
 
 export default function Home() {
   const [open, setOpen] = React.useState(false);
+  const [voterOpen, setVoterOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
-  const handleClickOpen = () => {
+  const handleOpen = () => {
     setOpen(true);
+  };
+  const handleClickClose = () => setVoterOpen(false);
+  const handleClickOpen = () => {
+    setVoterOpen(true);
   };
 
   const [sexOfBaby, setSexOfBaby] = React.useState("EUR");
@@ -43,8 +48,42 @@ export default function Home() {
       <h2>Welcome to babynamer!</h2>
       <h3>Are you:</h3>
 
+
+
+
       <div>
         <Button variant="outlined" onClick={handleClickOpen}>
+          Suggest and Vote
+        </Button>
+        <Dialog open={voterOpen} onClose={handleClickClose}>
+          <DialogTitle>Voters</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Know the username of the upcoming baby? Enter it here and we'll take you to their page!
+            </DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="username"
+              label="Username"
+              type="username"
+              fullWidth
+              variant="standard"
+            />
+            <DialogActions>
+            <Button onClick={handleClickClose}>Cancel</Button>
+            <Button onClick={handleClickClose}>GO!</Button>
+          </DialogActions>
+            </DialogContent>
+            </Dialog>
+            </div>
+
+<br></br>
+
+
+
+      <div>
+        <Button variant="outlined" onClick={handleOpen}>
           New Member
         </Button>
         <Dialog open={open} onClose={handleClose}>
