@@ -9,7 +9,9 @@ App.use(cors());
 App.use(Express.json())
 
 // Routes //
+const suggestionsRoutes = require("./routes/suggestions");
 
+App.use("/api/suggestions", suggestionsRoutes);
 
 App.listen(5000, () => {
   console.log("Server is listening on port 5000 🎉 ");
