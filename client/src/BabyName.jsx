@@ -6,12 +6,11 @@ import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
+import Fab from '@mui/material/Fab';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
 
 export default function BabyName() {
   const [state, setState] = useState({ suggestions: [] });
@@ -30,13 +29,13 @@ export default function BabyName() {
   }, []);
 
   const nameSuggestion = state.suggestions.map((d) => {
-    // <div>{d.name}{d.sex}{d.username}</div>
     return (
     <>
-      <ListItem disablePadding>
-        <ListItemButton>
-          <ListItemText primary={d.name} />
-        </ListItemButton>
+      <ListItem>
+          <ListItemText primary={d.name}  />
+          <Fab size="small" color="primary" aria-label="like">
+        <FavoriteIcon />
+      </Fab>
       </ListItem>
       <Divider />
     </>
@@ -45,7 +44,7 @@ export default function BabyName() {
   return (
     <main className="babynames">
       <h2>
-        These are your babynames!
+        These are the name suggestions for {state.suggestions[0] && state.suggestions[0].username}:
         
       </h2>
 
