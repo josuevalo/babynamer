@@ -12,6 +12,7 @@ import Fab from '@mui/material/Fab';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
+import { pink } from '@mui/material/colors';
 
 
 export default function BabyName() {
@@ -36,9 +37,11 @@ export default function BabyName() {
       <ListItem>
           <ListItemText primary={d.name}  />
           <Fab size="small" color="primary" aria-label="like">
-        <FavoriteIcon />
+      <ThumbUpAltIcon />
       </Fab>
-      
+      <Fab size="small" aria-label="like">
+      <ThumbDownAltIcon sx={{ color: pink[500] }} />
+      </Fab>
       </ListItem>
       <Divider />
     </>
@@ -55,18 +58,6 @@ export default function BabyName() {
         <nav aria-label="secondary mailbox folders">
           <List>
           {nameSuggestion}
-
-            {/* <ListItem disablePadding>
-              <ListItemButton>
-                <ListItemText primary="Trash" />
-              </ListItemButton>
-            </ListItem>
-            <Divider />
-            <ListItem disablePadding>
-              <ListItemButton component="a" href="#simple-list">
-                <ListItemText primary="Spam" />
-              </ListItemButton>
-            </ListItem> */}
           </List>
         </nav>
       </Box>
