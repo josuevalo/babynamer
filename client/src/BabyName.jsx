@@ -10,6 +10,8 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import Fab from '@mui/material/Fab';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 
 
 export default function BabyName() {
@@ -36,6 +38,7 @@ export default function BabyName() {
           <Fab size="small" color="primary" aria-label="like">
         <FavoriteIcon />
       </Fab>
+      
       </ListItem>
       <Divider />
     </>
