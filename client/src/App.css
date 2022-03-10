@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.badgeNum {
+  padding-left: 15px;
+}
+
+.select-sex {
+  padding-top: 1.5em;
+}

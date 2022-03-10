@@ -1,5 +1,5 @@
 import React from "react";
-import "../index.css";
+import "../App.css";
 import { useState } from "react";
 import Fab from "@mui/material/Fab";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";

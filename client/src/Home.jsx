@@ -37,7 +37,7 @@ export default function Home() {
     setVoterOpen(true);
   };
 
-  const [sexOfBaby, setSexOfBaby] = React.useState("EUR");
+  const [sexOfBaby, setSexOfBaby] = React.useState("Sex of Baby");
 
   const handleChange = (event) => {
     setSexOfBaby(event.target.value);
