@@ -27,6 +27,12 @@ const babyOptions = [
 
 export default function Home() {
   const [open, setOpen] = React.useState(false);
+  const [returningOpen, setreturningOpen] = React.useState(false);
+  const returningClickClose = () => setreturningOpen(false);
+  const returningClickOpen = () => {
+    setreturningOpen(true);
+  };
+
   const [voterOpen, setVoterOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => {
@@ -48,9 +54,6 @@ export default function Home() {
       <h2>Welcome to babynamer!</h2>
       <h3>Do you want to:</h3>
 
-
-
-
       <div>
         <Button variant="outlined" onClick={handleClickOpen}>
           Suggest and Vote
@@ -59,7 +62,8 @@ export default function Home() {
           <DialogTitle>Voters</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Know the username of the upcoming baby? Enter it here and we'll take you to their page!
+              Know the username of the upcoming baby? Enter it here and we'll
+              take you to their page!
             </DialogContentText>
             <TextField
               autoFocus
@@ -71,16 +75,16 @@ export default function Home() {
               variant="standard"
             />
             <DialogActions>
-            <Button onClick={handleClickClose}>Cancel</Button>
-            <Button onClick={handleClickClose}>GO!</Button>
-          </DialogActions>
-            </DialogContent>
-            </Dialog>
-            </div>
+              <Button onClick={handleClickClose}>Cancel</Button>
+              <Button onClick={handleClickClose}>GO!</Button>
+            </DialogActions>
+          </DialogContent>
+        </Dialog>
+      </div>
 
-<br></br>
+      <br></br>
 
-<h3>Or Are You a</h3>
+      <h3>Or Are You a</h3>
 
       <div>
         <Button variant="outlined" onClick={handleOpen}>
@@ -90,7 +94,8 @@ export default function Home() {
           <DialogTitle>Register</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Please register so we can keep track of the name suggestions for you!
+              Please register so we can keep track of the name suggestions for
+              you!
             </DialogContentText>
             <TextField
               autoFocus
@@ -113,7 +118,7 @@ export default function Home() {
 
             <TextField
               margin="dense"
-              id="password"
+              id="newPassword"
               label="Password"
               type="password"
               fullWidth
@@ -160,6 +165,40 @@ export default function Home() {
             <Button onClick={handleClose}>Cancel</Button>
             <Button onClick={handleClose}>Join!</Button>
           </DialogActions>
+        </Dialog>
+      </div>
+
+      <div>
+        <Button variant="outlined" onClick={returningClickOpen}>
+          Returning User
+        </Button>
+        <Dialog open={returningOpen} onClose={returningClickClose}>
+          <DialogTitle>Returning User</DialogTitle>
+          <DialogContent>
+            <DialogContentText>Login</DialogContentText>
+            <TextField
+              autoFocus
+              margin="dense"
+              id="username"
+              label="Username"
+              type="username"
+              fullWidth
+              variant="standard"
+            />
+
+            <TextField
+              margin="dense"
+              id="returningPassword"
+              label="Password"
+              type="password"
+              fullWidth
+              variant="standard"
+            />
+            <DialogActions>
+              <Button onClick={returningClickClose}>Cancel</Button>
+              <Button onClick={returningClickClose}>GO!</Button>
+            </DialogActions>
+          </DialogContent>
         </Dialog>
       </div>
     </main>
