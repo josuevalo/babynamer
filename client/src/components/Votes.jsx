@@ -19,7 +19,6 @@ export default function Votes() {
     };
  
 
-
   return (
     <main className="votes">
           <Badge className="badgeNum" badgeContent={incCount} color="primary">

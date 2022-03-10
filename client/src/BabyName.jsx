@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import Votes from "./components/Votes";
+import AddName from "./components/AddName";
 import "./index.css";
 import { useState, useEffect } from "react";
 
@@ -44,6 +45,8 @@ export default function BabyName() {
         These are the name suggestions for{" "}
         {state.suggestions[0] && state.suggestions[0].username}:
       </h2>
+      <h3> Have a suggestion? </h3>
+      <AddName />
 
       <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
         <nav aria-label="secondary mailbox folders">

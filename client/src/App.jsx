@@ -1,4 +1,3 @@
-import { useState } from "react";
 // import Cookies from 'universal-cookie';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
