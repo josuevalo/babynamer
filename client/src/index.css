@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.badgeNum {
+  padding-left: 15px;
+  /* padding-right: 10px; */
+}
