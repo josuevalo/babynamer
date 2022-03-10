@@ -2,7 +2,7 @@ const db = require('../index');
 
 const getSuggestions = () => {
   return db.query(`
-  SELECT suggestions.id as suggestion_id, suggestions.name as name, suggestions.sex as sex, users.id as user_id, users.username as username 
+  SELECT suggestions.id as suggestion_id, suggestions.name as name, suggestions.sex as sex, users.id as user_id, users.username as username, users.due_date as date
   FROM suggestions 
   INNER JOIN users 
   ON (suggestions.user_id = users.id) 

@@ -4,7 +4,6 @@ import Votes from "./components/Votes";
 import AddName from "./components/AddName";
 import "./index.css";
 import { useState, useEffect } from "react";
-
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -27,11 +26,11 @@ export default function BabyName() {
       });
   }, []);
 
-  const nameSuggestion = state.suggestions.map((d) => {
+  const nameSuggestion = state.suggestions.map((suggestion) => {
     return (
       <>
         <ListItem>
-          <ListItemText primary={d.name} />
+          <ListItemText primary={suggestion.name} />
           <Votes />
         </ListItem>
         <Divider />
@@ -43,11 +42,13 @@ export default function BabyName() {
     <main className="babynames">
       <h2>
         These are the name suggestions for{" "}
-        {state.suggestions[0] && state.suggestions[0].username}:
+        {state.suggestions[0] && state.suggestions[0].username}'s baby{" "}
       </h2>
+      <h3>Profile</h3>
+      <h4>{state.suggestions[0] && state.suggestions[0].sex}</h4>
+      <h4>{state.suggestions[0] && state.suggestions[0].date}</h4>
       <h3> Have a suggestion? </h3>
       <AddName />
-
       <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
         <nav aria-label="secondary mailbox folders">
           <List>{nameSuggestion}</List>
