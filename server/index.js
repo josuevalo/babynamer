@@ -1,7 +1,7 @@
 const Express = require("express");
 const App = Express();
 const cors = require('cors');
-const pool = require('./db/index.js')
+
 
 // Middleware //
 
@@ -10,8 +10,10 @@ App.use(Express.json())
 
 // Routes //
 const suggestionsRoutes = require("./routes/suggestions");
+const jwtAuthRoutes = require("./routes/jwtauth");
 
 App.use("/api/suggestions", suggestionsRoutes);
+App.use("/api/auth", jwtAuthRoutes);
 
 App.listen(5000, () => {
   console.log("Server is listening on port 5000 🎉 ");
