@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { insertUsers } = require('../db/db-queries/users-query');
+// const { insertUsers } = require('../db/db-queries/users-query');
 const bcrypt = require('bcrypt');
 const pool = require('./db/index.js')
 const validInfo = require("../middleware/validInfo");

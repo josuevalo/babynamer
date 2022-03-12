@@ -6,19 +6,17 @@ import {
   Redirect
 } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { toast } from "react-toastify";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./Home";
 import BabyName from "./BabyName";
 
-toast.configure();
 
 export default function App() {
 
   const checkAuthenticated = async () => {
     try {
-      const res = await fetch("http://localhost:5000/authentication/verify", {
+      const res = await fetch("http://localhost:5000/api/auth/verify", {
         method: "POST",
         headers: { jwt_token: localStorage.token }
       });
