@@ -48,7 +48,7 @@ export default function App() {
 
 
 
-        <Switch>
+        {/* <Switch>
             <Route
               exact
               path="/login"
@@ -82,13 +82,13 @@ export default function App() {
                 )
               }
             />
-          </Switch>
+          </Switch> */}
 
 
 
 
 
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home setAuth={setAuth} />} />
           <Route
             path="/:username"
             element={

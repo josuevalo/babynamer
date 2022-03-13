@@ -1,5 +1,6 @@
 import "./index.css";
 import * as React from "react";
+import Register from './components/Register'
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -7,25 +8,24 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Box from "@mui/material/Box";
-import MenuItem from "@mui/material/MenuItem";
 
-const babyOptions = [
-  {
-    value: "Boy",
-    label: "Boy",
-  },
-  {
-    value: "Girl",
-    label: "Girl",
-  },
-  {
-    value: "Surprise",
-    label: "Surprise",
-  },
-];
 
-export default function Home() {
+// const babyOptions = [
+//   {
+//     value: "Boy",
+//     label: "Boy",
+//   },
+//   {
+//     value: "Girl",
+//     label: "Girl",
+//   },
+//   {
+//     value: "Surprise",
+//     label: "Surprise",
+//   },
+// ];
+
+export default function Home({ setAuth }) {
   const [open, setOpen] = React.useState(false);
   const [returningOpen, setreturningOpen] = React.useState(false);
   const returningClickClose = () => setreturningOpen(false);
@@ -43,11 +43,11 @@ export default function Home() {
     setVoterOpen(true);
   };
 
-  const [sexOfBaby, setSexOfBaby] = React.useState("Sex of Baby");
+  // const [sexOfBaby, setSexOfBaby] = React.useState("Sex of Baby");
 
-  const handleChange = (event) => {
-    setSexOfBaby(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setSexOfBaby(event.target.value);
+  // };
 
   return (
     <main className="home">
@@ -86,11 +86,12 @@ export default function Home() {
 
       <h3>Or Are You a</h3>
 
-      <div>
+    
         <Button variant="outlined" onClick={handleOpen}>
           New Member
         </Button>
-        <Dialog open={open} onClose={handleClose}>
+        <Register handleClose={handleClose} open={open}  setAuth={setAuth}/>
+        {/* <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Register</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -166,7 +167,7 @@ export default function Home() {
             <Button onClick={handleClose}>Join!</Button>
           </DialogActions>
         </Dialog>
-      </div>
+      </div> */}
 
       <div>
         <Button variant="outlined" onClick={returningClickOpen}>
