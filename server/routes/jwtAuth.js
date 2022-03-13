@@ -1,19 +1,18 @@
-const express = require('express');
-const router  = express.Router();
+const express = require("express");
+const router = express.Router();
 // const { insertUsers } = require('../db/db-queries/users-query');
-const bcrypt = require('bcrypt');
-const pool = require('../db/index.js')
+const bcrypt = require("bcrypt");
+const pool = require("../db/index.js");
 const validInfo = require("../middleware/validInfo");
 const jwtGenerator = require("../utils/jwtGenerator");
 const authorize = require("../middleware/authorize");
 
-
 router.post("/register", validInfo, async (req, res) => {
-  const { email, name, password } = req.body;
+  const { username, email, password, due_date, baby_sex } = req.body;
 
   try {
-    const user = await pool.query("SELECT * FROM users WHERE user_email = $1", [
-      email
+    const user = await pool.query("SELECT * FROM users WHERE email = $1", [
+      email,
     ]);
 
     if (user.rows.length > 0) {
@@ -24,11 +23,11 @@ router.post("/register", validInfo, async (req, res) => {
     const bcryptPassword = await bcrypt.hash(password, salt);
 
     let newUser = await pool.query(
-      "INSERT INTO users (username, email, password, date, sex) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [name, email, bcryptPassword]
+      "INSERT INTO users (username, email, password, due_date, baby_sex) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [username, email, bcryptPassword, due_date, baby_sex]
     );
 
-    const jwtToken = jwtGenerator(newUser.rows[0].user_id);
+    const jwtToken = jwtGenerator(newUser.rows[0].id);
 
     return res.json({ jwtToken });
   } catch (err) {
@@ -42,7 +41,7 @@ router.post("/login", validInfo, async (req, res) => {
 
   try {
     const user = await pool.query("SELECT * FROM users WHERE email = $1", [
-      email
+      email,
     ]);
 
     if (user.rows.length === 0) {

@@ -53,7 +53,7 @@ export default function Register({ setAuth, handleClose, open }) {
   const onSubmitForm = async e => {
     e.preventDefault();
     try {
-      const body = { username, email, password, date, sex };
+      const body = { username, email, password, due_date: date, baby_sex: sex };
       console.log({body})
       const response = await fetch(
         "http://localhost:5000/api/auth/register",
