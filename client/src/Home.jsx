@@ -10,21 +10,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 
-// const babyOptions = [
-//   {
-//     value: "Boy",
-//     label: "Boy",
-//   },
-//   {
-//     value: "Girl",
-//     label: "Girl",
-//   },
-//   {
-//     value: "Surprise",
-//     label: "Surprise",
-//   },
-// ];
-
 export default function Home({ setAuth }) {
   const [open, setOpen] = React.useState(false);
   const [returningOpen, setreturningOpen] = React.useState(false);
@@ -43,11 +28,6 @@ export default function Home({ setAuth }) {
     setVoterOpen(true);
   };
 
-  // const [sexOfBaby, setSexOfBaby] = React.useState("Sex of Baby");
-
-  // const handleChange = (event) => {
-  //   setSexOfBaby(event.target.value);
-  // };
 
   return (
     <main className="home">
@@ -91,83 +71,7 @@ export default function Home({ setAuth }) {
           New Member
         </Button>
         <Register handleClose={handleClose} open={open}  setAuth={setAuth}/>
-        {/* <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Register</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Please register so we can keep track of the name suggestions for
-              you!
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="username"
-              label="Username"
-              type="username"
-              fullWidth
-              variant="standard"
-            />
-
-            <TextField
-              margin="dense"
-              id="email"
-              label="Email Address"
-              type="email"
-              fullWidth
-              variant="standard"
-            />
-
-            <TextField
-              margin="dense"
-              id="newPassword"
-              label="Password"
-              type="password"
-              fullWidth
-              variant="standard"
-            />
-
-            <DialogContentText>Due Date</DialogContentText>
-            <TextField
-              margin="dense"
-              id="duedate"
-              label=""
-              type="date"
-              fullWidth
-              variant="standard"
-            />
-
-            <Box
-              component="form"
-              sx={{
-                "& .MuiTextField-root": { m: 1, width: "25ch" },
-              }}
-              noValidate
-              autoComplete="off"
-            >
-              <div>
-                <TextField
-                  id="outlined-select-sex"
-                  select
-                  label="Select"
-                  value={sexOfBaby}
-                  onChange={handleChange}
-                  helperText="Please select the sex of the baby"
-                >
-                  {babyOptions.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </div>
-            </Box>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleClose}>Join!</Button>
-          </DialogActions>
-        </Dialog>
-      </div> */}
+        
 
       <div>
         <Button variant="outlined" onClick={returningClickOpen}>
