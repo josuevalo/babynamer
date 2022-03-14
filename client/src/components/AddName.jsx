@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 // import Fab from "@mui/material/Fab";
 // import AddIcon from "@mui/icons-material/Add";
@@ -27,7 +27,7 @@ const babyOptions = [
   },
 ];
 
-export default function AddName() {
+export default function AddName({ setAuth }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -38,10 +38,44 @@ export default function AddName() {
     setOpen(false);
   };
 
-  const [sexOfBaby, setSexOfBaby] = React.useState("Sex of Baby");
+  const [inputs, setInputs] = useState({
+    name: "",
+    sex: "",
+  });
 
-  const handleChange = (event) => {
-    setSexOfBaby(event.target.value);
+  const { name, sex } = inputs;
+
+  const onChange = (e) => 
+  setInputs({ ...inputs, [e.target.id || e.target.name]: e.target.value });
+
+  const onSubmitForm = async (e) => {
+    e.preventDefault();
+    try {
+      const body = { name, sex };
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      const parseRes = await response.json();
+
+      if (parseRes.jwtToken) {
+        localStorage.setItem("token", parseRes.jwtToken);
+        setAuth(true);
+        handleClose();
+        console.log("Name added Sucessfully");
+        // toast.success("Logged in Successfully");
+      } else {
+        setAuth(false);
+        console.log("Error:", parseRes);
+        // toast.error(parseRes);
+      }
+    } catch (err) {
+      console.error("Something went wrong", err.message);
+    }
   };
 
   return (
@@ -72,15 +106,16 @@ export default function AddName() {
             type="text"
             fullWidth
             variant="standard"
+            onChange={onChange}
           />
           <div className="select-sex">
             <TextField
               id="outlined-select-sex"
               select
               label="Select"
-              value={sexOfBaby}
-              onChange={handleChange}
+              value={sex}
               helperText="Please select the gender of the name"
+              onChange={onChange}
             >
               {babyOptions.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -92,7 +127,7 @@ export default function AddName() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Submit!</Button>
+          <Button onClick={onSubmitForm}>Submit!</Button>
         </DialogActions>
       </Dialog>
     </main>

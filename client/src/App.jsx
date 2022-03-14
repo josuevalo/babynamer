@@ -92,7 +92,7 @@ export default function App() {
           <Route
             path="/:username"
             element={
-              <BabyName />
+              <BabyName setAuth={setAuth}/>
             }
           />
         </Routes>
