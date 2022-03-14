@@ -3,7 +3,7 @@ const router  = express.Router();
 const { getSuggestions } = require('../db/db-queries/suggestions-query');
 
 router.get("/:username", (req, res) => {
-  console.log("req", req)
+  // console.log("req", req)
   const username = req.params.username
   getSuggestions(username)
     .then((suggestions) => {
@@ -16,5 +16,4 @@ router.get("/:username", (req, res) => {
     });
 });
 
-// export router object
 module.exports = router;

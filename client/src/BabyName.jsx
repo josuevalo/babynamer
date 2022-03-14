@@ -15,7 +15,7 @@ export default function BabyName({setAuth}) {
 
   const [state, setState] = useState({ suggestions: [] });
 
-  const { username } = useParams()
+  const { username } = useParams();
   useEffect(() => {
     axios
       .get(`/api/suggestions/${username}`) 
@@ -52,7 +52,7 @@ export default function BabyName({setAuth}) {
       <h4>{state.suggestions[0] && state.suggestions[0].baby_sex}</h4>
       <h4>{state.suggestions[0] && state.suggestions[0].date}</h4>
       <h3> Have a suggestion? </h3>
-      <AddName setAuth={setAuth}/>
+      <AddName username={username} setAuth={setAuth}/>
       <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
         <nav aria-label="secondary mailbox folders">
           <List>{nameSuggestion}</List>

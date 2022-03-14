@@ -27,7 +27,7 @@ const babyOptions = [
   },
 ];
 
-export default function AddName({ setAuth }) {
+export default function AddName({ username, setAuth }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -49,10 +49,11 @@ export default function AddName({ setAuth }) {
   setInputs({ ...inputs, [e.target.id || e.target.name]: e.target.value });
 
   const onSubmitForm = async (e) => {
+    handleClose();
     e.preventDefault();
     try {
-      const body = { name, sex };
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const body = { name, sex, username };
+      const response = await fetch("http://localhost:5000/api/add-suggestions", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -65,7 +66,6 @@ export default function AddName({ setAuth }) {
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
         setAuth(true);
-        handleClose();
         console.log("Name added Sucessfully");
         // toast.success("Logged in Successfully");
       } else {
@@ -110,7 +110,8 @@ export default function AddName({ setAuth }) {
           />
           <div className="select-sex">
             <TextField
-              id="outlined-select-sex"
+              // id="sex"
+              name="sex"
               select
               label="Select"
               value={sex}
