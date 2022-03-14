@@ -4,19 +4,25 @@ import Votes from "./components/Votes";
 import AddName from "./components/AddName";
 import "./index.css";
 import { useState, useEffect } from "react";
+import { useHistory, useParams } from 'react-router-dom'
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 
-export default function BabyName() {
+export default function BabyName(props) {
+  console.log("props", props)
   const [state, setState] = useState({ suggestions: [] });
+
+  const { username } = useParams()
+  console.log("use params", useParams())
   useEffect(() => {
+    console.log("username--->", username)
     axios
-      .get("/api/suggestions") // Just to test that DB layer works
+      .get(`/api/suggestions/${username}`) 
       .then((response) => {
-        console.log("Suggestions: " + response.data);
+        console.log("Suggestions: ", response.data);
         setState({
           suggestions: response.data.suggestions,
         });

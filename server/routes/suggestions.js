@@ -2,9 +2,10 @@ const express = require('express');
 const router  = express.Router();
 const { getSuggestions } = require('../db/db-queries/suggestions-query');
 
-// GET users table
-router.get("/", (req, res) => {
-  getSuggestions()
+router.get("/:username", (req, res) => {
+  console.log("req", req)
+  const username = req.params.username
+  getSuggestions(username)
     .then((suggestions) => {
       res.json({ suggestions });
     })
