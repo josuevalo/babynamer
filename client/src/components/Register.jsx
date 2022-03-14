@@ -11,7 +11,6 @@ import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 
 
-
 const babyOptions = [
   {
     value: "Boy",
@@ -29,11 +28,7 @@ const babyOptions = [
 
 export default function Register({ setAuth, handleClose, open }) {
 
-  // const [sexOfBaby, setSexOfBaby] = React.useState("Sex of Baby");
 
-  // const handleChange = (event) => {
-  //   setSexOfBaby(event.target.value);
-  // };
 
   const [inputs, setInputs] = useState({
     username: "",
@@ -146,7 +141,6 @@ export default function Register({ setAuth, handleClose, open }) {
             <div>
               <TextField
                 select
-                // id="sex"
                 name="sex"
                 label="Select"
                 value={sex}
