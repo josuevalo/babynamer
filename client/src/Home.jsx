@@ -75,7 +75,7 @@ export default function Home({ setAuth }) {
         
 
       <div>
-        <Button variant="outlined" onClick={returningClickOpen}>
+        <Button variant="outlined" onClick={returningClickOpen} setAuth={setAuth}>
           Returning User
         </Button>
         <Login returningOpen={returningOpen} returningClickClose={returningClickClose}/>

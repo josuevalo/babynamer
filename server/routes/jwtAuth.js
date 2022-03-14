@@ -37,26 +37,26 @@ router.post("/register", validInfo, async (req, res) => {
 });
 
 router.post("/login", validInfo, async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
 
   try {
-    const user = await pool.query("SELECT * FROM users WHERE email = $1", [
-      email,
+    const user = await pool.query("SELECT * FROM users WHERE username = $1", [
+      username,
     ]);
 
     if (user.rows.length === 0) {
       return res.status(401).json("Invalid Credential");
     }
-
+console.log("user.rows",user.rows)
     const validPassword = await bcrypt.compare(
       password,
-      user.rows[0].user_password
+      user.rows[0].password
     );
 
     if (!validPassword) {
-      return res.status(401).json("Invalid Credential");
+      return res.status(401).json("Invalid Credentials");
     }
-    const jwtToken = jwtGenerator(user.rows[0].user_id);
+    const jwtToken = jwtGenerator(user.rows[0].id);
     return res.json({ jwtToken });
   } catch (err) {
     console.error(err.message);
