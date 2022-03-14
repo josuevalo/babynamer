@@ -1,6 +1,7 @@
 import "./index.css";
 import * as React from "react";
 import Register from './components/Register'
+import Login from './components/Login'
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -77,7 +78,8 @@ export default function Home({ setAuth }) {
         <Button variant="outlined" onClick={returningClickOpen}>
           Returning User
         </Button>
-        <Dialog open={returningOpen} onClose={returningClickClose}>
+        <Login returningOpen={returningOpen} returningClickClose={returningClickClose}/>
+        {/* <Dialog open={returningOpen} onClose={returningClickClose}>
           <DialogTitle>Returning User</DialogTitle>
           <DialogContent>
             <DialogContentText>Login</DialogContentText>
@@ -104,7 +106,7 @@ export default function Home({ setAuth }) {
               <Button onClick={returningClickClose}>GO!</Button>
             </DialogActions>
           </DialogContent>
-        </Dialog>
+        </Dialog> */}
       </div>
     </main>
   );
