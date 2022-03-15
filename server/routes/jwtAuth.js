@@ -40,7 +40,7 @@ router.post("/login", validInfo, async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const user = await pool.query("SELECT * FROM users WHERE username = $1", [
+    const user = await pool.query('SELECT * FROM users WHERE username = $1', [
       username,
     ]);
 
@@ -67,6 +67,32 @@ console.log("user.rows",user.rows)
 router.post("/verify", authorize, (req, res) => {
   try {
     res.json(true);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.post("/voter-registration", validInfo, async (req, res) => {
+  const { name, email } = req.body;
+
+  try {
+    const user = await pool.query('SELECT * FROM voters WHERE email = $1', [
+      email,
+    ]);
+
+    if (user.rows.length > 0) {
+      return res.status(401).json("User already exist!");
+    }
+
+    let newUser = await pool.query(
+      'INSERT INTO voters (name, email) VALUES ($1, $2) RETURNING *',
+      [username, email, bcryptPassword, due_date, baby_sex]
+    );
+
+    const jwtToken = jwtGenerator(newUser.rows[0].id);
+
+    return res.json({ jwtToken });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
