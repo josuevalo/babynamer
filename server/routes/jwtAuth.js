@@ -82,7 +82,9 @@ router.post("/voter-registration", validInfo, async (req, res) => {
     ]);
 
     if (user.rows.length > 0) {
-      return res.status(401).json("User already exist!");
+      // return res.status(401).json("User already exist!");
+      const jwtToken = jwtGenerator(user.rows[0].id);
+      return res.json({ jwtToken });
     }
 
     let newUser = await pool.query(
