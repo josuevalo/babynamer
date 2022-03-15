@@ -12,14 +12,11 @@ import DialogTitle from "@mui/material/DialogTitle";
 export default function VoterRegistration({ setAuth, handleClose, open }) {
 
   const [inputs, setInputs] = useState({
-    username: "",
+    name: "",
     email: "",
-    password: "",
-    date: "",
-    sex: "",
   });
 
-  const { username, email, password, date, sex } = inputs;
+  const { name, email } = inputs;
 
   const onChange = e => {
     console.log("event", e)
@@ -29,7 +26,7 @@ export default function VoterRegistration({ setAuth, handleClose, open }) {
   const onSubmitForm = async e => {
     e.preventDefault();
     try {
-      const body = { username, email, password, due_date: date, baby_sex: sex };
+      const body = { name, email };
       console.log({body})
       const response = await fetch(
         "http://localhost:5000/api/auth/register",
@@ -61,7 +58,7 @@ export default function VoterRegistration({ setAuth, handleClose, open }) {
 
 
   return (
-    <main className="register">
+    <main className="voter-registration">
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Register</DialogTitle>
         <DialogContent>
