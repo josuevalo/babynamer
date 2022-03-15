@@ -37,9 +37,7 @@ export default function Home({ setAuth }) {
           handleClickClose={handleClickClose}
         />
       </div>
-
       <br></br>
-
       <h3>Or Are You a</h3>
 
       <Button variant="outlined" onClick={handleOpen}>

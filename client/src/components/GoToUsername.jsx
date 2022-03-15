@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import "../App.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -8,8 +9,23 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function Login({ voterOpen, handleClickClose }) {
+export default function GoToUsername({ voterOpen, handleClickClose }) {
+  const [inputs, setInputs] = useState({
+    username: "",
+  });
 
+  const { username } = inputs;
+
+  const onChange = e =>
+  setInputs({ ...inputs, [e.target.id]: e.target.value });
+
+  const navigate = useNavigate();
+
+const onSubmitForm = (e) => {
+  e.preventDefault();
+  handleClickClose()
+  navigate(`/${username}`);
+}
 
   return (
     <main className="login">
@@ -28,10 +44,11 @@ export default function Login({ voterOpen, handleClickClose }) {
             type="username"
             fullWidth
             variant="standard"
+            onChange={onChange}
           />
           <DialogActions>
             <Button onClick={handleClickClose}>Cancel</Button>
-            <Button onClick={handleClickClose}>GO!</Button>
+            <Button onClick={onSubmitForm}>GO!</Button>
           </DialogActions>
         </DialogContent>
       </Dialog>
