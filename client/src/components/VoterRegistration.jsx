@@ -29,7 +29,7 @@ export default function VoterRegistration({ setAuth, handleClose, open }) {
       const body = { name, email };
       console.log({body})
       const response = await fetch(
-        "http://localhost:5000/api/auth/register",
+        "http://localhost:5000/api/auth/voter-registration",
         {
           method: "POST",
           headers: {
@@ -59,7 +59,7 @@ export default function VoterRegistration({ setAuth, handleClose, open }) {
 
   return (
     <main className="voter-registration">
-      <Dialog open={open} onClose={handleClose}>
+      {/* <Dialog open={open} onClose={handleClose}> */}
         <DialogTitle>Register</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -90,7 +90,7 @@ export default function VoterRegistration({ setAuth, handleClose, open }) {
           <Button onClick={onSubmitForm}>Join!</Button>
         </DialogActions>
         </DialogContent>
-      </Dialog>
+      {/* </Dialog> */}
     </main>
   );
 }

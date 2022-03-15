@@ -87,7 +87,7 @@ router.post("/voter-registration", validInfo, async (req, res) => {
 
     let newUser = await pool.query(
       'INSERT INTO voters (name, email) VALUES ($1, $2) RETURNING *',
-      [username, email, bcryptPassword, due_date, baby_sex]
+      [name, email]
     );
 
     const jwtToken = jwtGenerator(newUser.rows[0].id);
