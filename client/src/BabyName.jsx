@@ -35,7 +35,7 @@ export default function BabyName({setAuth}) {
       <>
         <ListItem>
           <ListItemText primary={suggestion.name} />
-          <Votes />
+          <Votes suggestion={suggestion} />
         </ListItem>
         <Divider />
       </>

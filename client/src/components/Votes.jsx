@@ -1,36 +1,88 @@
 import React from "react";
 import "../App.css";
-import { useState } from "react";
 import Fab from "@mui/material/Fab";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import { pink } from "@mui/material/colors";
 import Badge from "@mui/material/Badge";
 
-export default function Votes() {
+export default function Votes({ suggestion }) {
+  // const [incCount, setIncCount] = useState(0);
+  // const incNum = () => {
+  //   setIncCount(incCount + 1);
+  // };
+  // const [decCount, setDecCount] = useState(0);
+  // const decNum = () => {
+  //   setDecCount(decCount + 1);
+  // };
 
-  const [incCount, setIncCount] = useState(0);
-  const incNum = () => {
-    setIncCount(incCount + 1);
+  const onSubmitForm = async (type) => {
+    // e.preventDefault();
+
+    let isUpVote;
+
+    if (type === "increment") {
+      isUpVote = true;
+      console.log("SET UP VOTE INCREMENT", type);
+    } else {
+      console.log("SET UP VOTE DECREMENT", type);
+      isUpVote = false;
+    }
+
+    try {
+      const body = {
+        suggestionId: suggestion.suggestion_id,
+        voterId: 1,
+        isUpVote,
+      };
+      console.log({ body });
+      await fetch("http://localhost:5000/api/add-votes", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+    } catch (err) {
+      console.error(err.message);
+    }
   };
-  const [decCount, setDecCount] = useState(0);
-  const decNum = () => {
-  setDecCount(decCount + 1);
-    };
- 
 
   return (
     <main className="votes">
-          <Badge className="badgeNum" badgeContent={incCount} color="primary">
-            <Fab onClick={incNum} size="small"  aria-label="like">
-              <ThumbUpAltIcon color="primary" />
-            </Fab>
-          </Badge>
-          <Badge className="badgeNum" badgeContent={decCount} color="primary" sx={{ color: pink[500] }}>
-            <Fab onClick={decNum} size="small" aria-label="like">
-              <ThumbDownAltIcon sx={{ color: pink[500] }} />
-            </Fab>
-          </Badge>
+      <Badge
+        // name="increment"
+        className="badgeNum"
+        // badgeContent={incCount}
+        color="primary"
+      >
+        <Fab
+          // onClick={incNum}
+          name="increment"
+          onClick={() => onSubmitForm("increment")}
+          size="small"
+          aria-label="like"
+        >
+          <ThumbUpAltIcon color="primary" />
+        </Fab>
+      </Badge>
+      <Badge
+        // name="decrement"
+        className="badgeNum"
+        // badgeContent={decCount}
+        color="primary"
+        sx={{ color: pink[500] }}
+      >
+        <Fab
+          name="decrement"
+          onClick={() => onSubmitForm("decrement")}
+          // onClick={decNum}
+          size="small"
+          aria-label="like"
+        >
+          <ThumbDownAltIcon sx={{ color: pink[500] }} />
+        </Fab>
+      </Badge>
     </main>
   );
 }

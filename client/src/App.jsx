@@ -2,8 +2,6 @@ import {
   BrowserRouter,
   Route,
   Routes,
-  Switch,
-  Redirect
 } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "./App.css";
@@ -13,6 +11,7 @@ import BabyName from "./BabyName";
 
 
 export default function App() {
+
 
   const checkAuthenticated = async () => {
     try {
@@ -83,10 +82,6 @@ export default function App() {
               }
             />
           </Switch> */}
-
-
-
-
 
           <Route path="/" element={<Home setAuth={setAuth} />} />
           <Route
