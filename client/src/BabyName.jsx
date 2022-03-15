@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Votes from "./components/Votes";
 import AddName from "./components/AddName";
+import VoterRegistration from "./components/VoterRegistration";
 import "./index.css";
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom'
@@ -44,6 +45,7 @@ export default function BabyName({setAuth}) {
 
   return (
     <main className="babynames">
+      <VoterRegistration setAuth={setAuth} />
       <h2>
         These are the name suggestions for{" "}
         {state.suggestions[0] && state.suggestions[0].username}'s baby{" "}

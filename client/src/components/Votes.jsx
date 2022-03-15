@@ -17,8 +17,6 @@ export default function Votes({ suggestion }) {
   // };
 
   const onSubmitForm = async (type) => {
-    // e.preventDefault();
-
     let isUpVote;
 
     if (type === "increment") {
@@ -51,7 +49,6 @@ export default function Votes({ suggestion }) {
   return (
     <main className="votes">
       <Badge
-        // name="increment"
         className="badgeNum"
         // badgeContent={incCount}
         color="primary"
@@ -67,7 +64,6 @@ export default function Votes({ suggestion }) {
         </Fab>
       </Badge>
       <Badge
-        // name="decrement"
         className="badgeNum"
         // badgeContent={decCount}
         color="primary"
