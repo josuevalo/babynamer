@@ -53,7 +53,7 @@ export default function AddName({ username, setAuth }) {
     e.preventDefault();
     try {
       const body = { name, sex, username };
-      const response = await fetch("http://localhost:5000/api/add-suggestions", {
+      const response = await fetch("/api/add-suggestions", {
         method: "POST",
         headers: {
           "Content-type": "application/json",

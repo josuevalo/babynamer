@@ -29,7 +29,7 @@ export default function VoterRegistration({ setAuth }) {
       const body = { name, email };
       console.log({body})
       const response = await fetch(
-        "http://localhost:5000/api/auth/voter-registration",
+        "/api/auth/voter-registration",
         {
           method: "POST",
           headers: {

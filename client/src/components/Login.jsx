@@ -25,7 +25,7 @@ export default function Login({ setAuth, returningOpen, returningClickClose }) {
     try {
       const body = { username, password };
       const response = await fetch(
-        "http://localhost:5000/api/auth/login",
+        "/api/auth/login",
         {
           method: "POST",
           headers: {

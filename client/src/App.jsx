@@ -15,7 +15,7 @@ export default function App() {
 
   const checkAuthenticated = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/auth/verify", {
+      const res = await fetch("/api/auth/verify", {
         method: "POST",
         headers: { jwt_token: localStorage.token }
       });

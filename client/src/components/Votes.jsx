@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import Fab from "@mui/material/Fab";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
@@ -8,8 +8,32 @@ import Badge from "@mui/material/Badge";
 
 export default function Votes({ suggestion }) {
 
-let upVote = 0
-let downVote = 5
+  const fetchVotes = async () => {
+    try {
+      const response = await fetch(`/api/votes/get-votes/${suggestion.suggestion_id}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
+
+      const parseRes = await response.json();
+
+      setIncCount(Number(parseRes.upVotes))
+      setDecCount(Number(parseRes.downVotes))
+      console.log("response for votes", parseRes);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchVotes();
+  });
+
+
+  let upVote = 0;
+  let downVote = 0;
 
   const [incCount, setIncCount] = useState(upVote);
   const incNum = () => {
@@ -25,12 +49,12 @@ let downVote = 5
 
     if (type === "increment") {
       isUpVote = true;
-      incNum()
+      incNum();
       console.log("SET UP VOTE INCREMENT", type);
     } else {
       console.log("SET UP VOTE DECREMENT", type);
       isUpVote = false;
-      decNum()
+      decNum();
     }
 
     try {
@@ -40,7 +64,7 @@ let downVote = 5
         isUpVote,
       };
       console.log({ body });
-      await fetch("http://localhost:5000/api/add-votes", {
+      await fetch("/api/votes/add-vote", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -54,11 +78,7 @@ let downVote = 5
 
   return (
     <main className="votes">
-      <Badge
-        className="badgeNum"
-        badgeContent={incCount}
-        color="primary"
-      >
+      <Badge className="badgeNum" badgeContent={incCount} color="primary">
         <Fab
           // onClick={incNum}
           name="increment"

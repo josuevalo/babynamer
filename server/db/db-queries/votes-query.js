@@ -21,12 +21,12 @@ const addVote = (data) => {
 
 
 const getUpVotes = (data) => {
+  const { suggestionId } = data;
   return db.query(
         `
-    SELECT COUNT (*) from votes WHERE suggestion_id = 4 AND is_up_vote = true;
+    SELECT COUNT (*) from votes WHERE suggestion_id = $1 AND is_up_vote = true;
   `,
-
-        [suggestionId, voterId, isUpVote]
+        [suggestionId]
       )
 
         .then((res) => {
@@ -39,12 +39,12 @@ const getUpVotes = (data) => {
 };
 
 const getDownVotes = (data) => {
+  const { suggestionId } = data;
   return db.query(
         `
-    SELECT COUNT (*) from votes WHERE suggestion_id = 4 AND is_up_vote = false;
+    SELECT COUNT (*) from votes WHERE suggestion_id = $1 AND is_up_vote = false;
   `,
-
-        [suggestionId, voterId, isUpVote]
+        [suggestionId]
       )
 
         .then((res) => {
