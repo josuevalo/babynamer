@@ -11,7 +11,7 @@ const addVote = (data) => {
       )
 
         .then((res) => {
-          console.log("New suggestion entry inserted:", res.rows[0]);
+          console.log("Vote for name inserted:", res.rows[0]);
           return res.rows;
         })
         .catch((err) => {
