@@ -31,7 +31,7 @@ export default function Votes({ suggestion }) {
     fetchVotes();
   }, []);
 
-  
+
   const [incCount, setIncCount] = useState();
   const incNum = () => {
     setIncCount(incCount + 1);

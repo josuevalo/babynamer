@@ -99,7 +99,7 @@ export default function VoterRegistration({ setAuth }) {
             onChange={onChange}
           />
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          {/* <Button onClick={handleClose}>Cancel</Button> */}
           <Button onClick={onSubmitForm}>Go</Button>
         </DialogActions>
         </DialogContent>
