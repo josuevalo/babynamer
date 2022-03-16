@@ -6,6 +6,7 @@ import VoterRegistration from "./components/VoterRegistration";
 import "./index.css";
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom'
+import dayjs from "dayjs";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -43,6 +44,9 @@ export default function BabyName({ setAuth, isAuthenticated }) {
     );
   });
 
+
+ const babyDueDate =  dayjs(`${state.suggestions[0] && state.suggestions[0].date}`).format('dddd, MMMM DD, YYYY')
+
   return (
     <main className="babynames">
       <VoterRegistration setAuth={setAuth} isAuthenticated={isAuthenticated} />
@@ -52,7 +56,8 @@ export default function BabyName({ setAuth, isAuthenticated }) {
       </h2>
       <h3>Profile</h3>
       <h4>{state.suggestions[0] && state.suggestions[0].baby_sex}</h4>
-      <h4>{state.suggestions[0] && state.suggestions[0].date}</h4>
+      <h4>{babyDueDate}</h4>
+      
       <h3> Have a suggestion? </h3>
       <AddName username={username} setAuth={setAuth}/>
       <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
