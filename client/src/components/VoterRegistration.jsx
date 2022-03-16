@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -8,9 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-
-export default function VoterRegistration({ setAuth }) {
-
+export default function VoterRegistration({ setAuth, isAuthenticated }) {
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
@@ -18,37 +16,34 @@ export default function VoterRegistration({ setAuth }) {
 
   const { name, email } = inputs;
 
-  const onChange = e => {
-    console.log("event", e)
+  const onChange = (e) => {
+    console.log("event", e);
     setInputs({ ...inputs, [e.target.id || e.target.name]: e.target.value });
-  }
+  };
 
-  const onSubmitForm = async e => {
+  const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
       const body = { name, email };
-      console.log({body})
-      const response = await fetch(
-        "/api/auth/voter-registration",
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json"
-          },
-          body: JSON.stringify(body)
-        }
-      );
+      console.log({ body });
+      const response = await fetch("/api/auth/voter-registration", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
       const parseRes = await response.json();
 
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
         setAuth(true);
-        handleClose()
-        console.log("Registration Successful!")
+        handleClose();
+        console.log("Registration Successful!");
         // toast.success("Register Successfully");
       } else {
         setAuth(false);
-        console.log("Error with Registration", parseRes)
+        console.log("Error with Registration", parseRes);
         // toast.error(parseRes);
       }
     } catch (err) {
@@ -56,13 +51,17 @@ export default function VoterRegistration({ setAuth }) {
     }
   };
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setOpen(true);
+    } else {
+      setOpen(false)
+    }
+  }, [isAuthenticated]);
 
-  const [open, setOpen] = React.useState(true);
-  // if (setAuth(true)) {
-  //   setOpen(false);
-  // } else {
-  //   setOpen(true);
-  // }
+  const [open, setOpen] = React.useState(false);
+  console.log("is auth", isAuthenticated);
+
   const handleClose = () => setOpen(false);
   // const handleOpen = () => {
   //   setOpen(true);
@@ -74,7 +73,8 @@ export default function VoterRegistration({ setAuth }) {
         <DialogTitle>WELCOME!</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please register so we can keep track your suggestions and votes for you!
+            Please register so we can keep track your suggestions and votes for
+            you!
             <br></br>
             If you have already registered, you can use the same form to login.
           </DialogContentText>
@@ -98,10 +98,10 @@ export default function VoterRegistration({ setAuth }) {
             variant="standard"
             onChange={onChange}
           />
-        <DialogActions>
-          {/* <Button onClick={handleClose}>Cancel</Button> */}
-          <Button onClick={onSubmitForm}>Go</Button>
-        </DialogActions>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={onSubmitForm}>Go</Button>
+          </DialogActions>
         </DialogContent>
       </Dialog>
     </main>

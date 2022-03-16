@@ -87,7 +87,7 @@ export default function App() {
           <Route
             path="/:username"
             element={
-              <BabyName setAuth={setAuth}/>
+              <BabyName setAuth={setAuth} isAuthenticated={isAuthenticated} />
             }
           />
         </Routes>

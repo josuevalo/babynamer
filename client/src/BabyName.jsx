@@ -12,7 +12,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 
-export default function BabyName({setAuth}) {
+export default function BabyName({ setAuth, isAuthenticated }) {
 
   const [state, setState] = useState({ suggestions: [] });
 
@@ -45,7 +45,7 @@ export default function BabyName({setAuth}) {
 
   return (
     <main className="babynames">
-      <VoterRegistration setAuth={setAuth} />
+      <VoterRegistration setAuth={setAuth} isAuthenticated={isAuthenticated} />
       <h2>
         These are the name suggestions for{" "}
         {state.suggestions[0] && state.suggestions[0].username}'s baby{" "}
