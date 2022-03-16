@@ -29,17 +29,14 @@ export default function Votes({ suggestion }) {
 
   useEffect(() => {
     fetchVotes();
-  });
+  }, []);
 
-
-  let upVote = 0;
-  let downVote = 0;
-
-  const [incCount, setIncCount] = useState(upVote);
+  
+  const [incCount, setIncCount] = useState();
   const incNum = () => {
     setIncCount(incCount + 1);
   };
-  const [decCount, setDecCount] = useState(downVote);
+  const [decCount, setDecCount] = useState();
   const decNum = () => {
     setDecCount(decCount + 1);
   };
@@ -50,9 +47,7 @@ export default function Votes({ suggestion }) {
     if (type === "increment") {
       isUpVote = true;
       incNum();
-      console.log("SET UP VOTE INCREMENT", type);
     } else {
-      console.log("SET UP VOTE DECREMENT", type);
       isUpVote = false;
       decNum();
     }
