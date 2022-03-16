@@ -9,7 +9,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 
-export default function VoterRegistration({ setAuth, handleClose, open }) {
+export default function VoterRegistration({ setAuth }) {
 
   const [inputs, setInputs] = useState({
     name: "",
@@ -57,13 +57,26 @@ export default function VoterRegistration({ setAuth, handleClose, open }) {
   };
 
 
+  const [open, setOpen] = React.useState(true);
+  // if (setAuth(true)) {
+  //   setOpen(false);
+  // } else {
+  //   setOpen(true);
+  // }
+  const handleClose = () => setOpen(false);
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
+
   return (
     <main className="voter-registration">
-      {/* <Dialog open={open} onClose={handleClose}> */}
-        <DialogTitle>Register</DialogTitle>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>WELCOME!</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Please register so we can keep track your suggestions and votes for you!
+            <br></br>
+            If you have already registered, you can use the same form to login.
           </DialogContentText>
           <TextField
             autoFocus
@@ -87,10 +100,10 @@ export default function VoterRegistration({ setAuth, handleClose, open }) {
           />
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={onSubmitForm}>Join!</Button>
+          <Button onClick={onSubmitForm}>Go</Button>
         </DialogActions>
         </DialogContent>
-      {/* </Dialog> */}
+      </Dialog>
     </main>
   );
 }

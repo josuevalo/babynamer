@@ -19,6 +19,43 @@ const addVote = (data) => {
     });
 };
 
+
+const getUpVotes = (data) => {
+  return db.query(
+        `
+    SELECT COUNT (*) from votes WHERE suggestion_id = 4 AND is_up_vote = true;
+  `,
+
+        [suggestionId, voterId, isUpVote]
+      )
+
+        .then((res) => {
+          console.log("Upvote count:", res.rows[0]);
+          return res.rows;
+        })
+        .catch((err) => {
+          console.log("DB error with upvote: " + err.message);
+    });
+};
+
+const getDownVotes = (data) => {
+  return db.query(
+        `
+    SELECT COUNT (*) from votes WHERE suggestion_id = 4 AND is_up_vote = false;
+  `,
+
+        [suggestionId, voterId, isUpVote]
+      )
+
+        .then((res) => {
+          console.log("Downvote count:", res.rows[0]);
+          return res.rows;
+        })
+        .catch((err) => {
+          console.log("DB error with downvote: " + err.message);
+    });
+};
+
 module.exports = {
-  addVote,
+  addVote, getUpVotes, getDownVotes
 };

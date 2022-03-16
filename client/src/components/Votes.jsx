@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
 import Fab from "@mui/material/Fab";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
@@ -7,24 +7,30 @@ import { pink } from "@mui/material/colors";
 import Badge from "@mui/material/Badge";
 
 export default function Votes({ suggestion }) {
-  // const [incCount, setIncCount] = useState(0);
-  // const incNum = () => {
-  //   setIncCount(incCount + 1);
-  // };
-  // const [decCount, setDecCount] = useState(0);
-  // const decNum = () => {
-  //   setDecCount(decCount + 1);
-  // };
+
+let upVote = 0
+let downVote = 5
+
+  const [incCount, setIncCount] = useState(upVote);
+  const incNum = () => {
+    setIncCount(incCount + 1);
+  };
+  const [decCount, setDecCount] = useState(downVote);
+  const decNum = () => {
+    setDecCount(decCount + 1);
+  };
 
   const onSubmitForm = async (type) => {
     let isUpVote;
 
     if (type === "increment") {
       isUpVote = true;
+      incNum()
       console.log("SET UP VOTE INCREMENT", type);
     } else {
       console.log("SET UP VOTE DECREMENT", type);
       isUpVote = false;
+      decNum()
     }
 
     try {
@@ -50,7 +56,7 @@ export default function Votes({ suggestion }) {
     <main className="votes">
       <Badge
         className="badgeNum"
-        // badgeContent={incCount}
+        badgeContent={incCount}
         color="primary"
       >
         <Fab
@@ -65,7 +71,7 @@ export default function Votes({ suggestion }) {
       </Badge>
       <Badge
         className="badgeNum"
-        // badgeContent={decCount}
+        badgeContent={decCount}
         color="primary"
         sx={{ color: pink[500] }}
       >
