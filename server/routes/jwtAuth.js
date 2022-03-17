@@ -93,8 +93,9 @@ router.post("/voter-registration", validInfo, async (req, res) => {
     );
 
     const jwtToken = jwtGenerator(newUser.rows[0].id);
+    const voterRegResponse = newUser.rows[0]
 
-    return res.json({ jwtToken });
+    return res.json({ jwtToken, voterRegResponse });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

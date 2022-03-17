@@ -34,6 +34,9 @@ export default function VoterRegistration({ setAuth, isAuthenticated }) {
         body: JSON.stringify(body),
       });
       const parseRes = await response.json();
+      /// VOTER ID IS BELOW!!!! ///
+      console.log("parge res voter reg", parseRes)
+      const voterId = parseRes.voterRegResponse.id
 
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
