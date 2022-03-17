@@ -8,13 +8,13 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 // import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import Slide from "@mui/material/Slide";
+// import Slide from "@mui/material/Slide";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+// const Transition = React.forwardRef(function Transition(props, ref) {
+//   return <Slide direction="up" ref={ref} {...props} />;
+// });
 
 const babyOptions = [
   {
@@ -27,7 +27,7 @@ const babyOptions = [
   },
 ];
 
-export default function AddName({ username, setAuth }) {
+export default function AddName({ username, setAuth, setSuggestionState }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -62,17 +62,27 @@ export default function AddName({ username, setAuth }) {
       });
 
       const parseRes = await response.json();
+      setSuggestionState((prev) => {
+        console.log("prev", prev)
+        console.log("response--->", parseRes.addSuggestions[0])
+                  return { ...prev, suggestions: [...prev.suggestions, parseRes.addSuggestions[0]] }
+                })
 
-      if (parseRes.jwtToken) {
-        localStorage.setItem("token", parseRes.jwtToken);
-        setAuth(true);
-        console.log("Name added Sucessfully");
-        // toast.success("Logged in Successfully");
-      } else {
-        setAuth(false);
-        console.log("Error:", parseRes);
-        // toast.error(parseRes);
-      }
+//       if (parseRes.jwtToken) {
+//         localStorage.setItem("token", parseRes.jwtToken);
+//         setAuth(true);
+//         setSuggestionState((prev) => {
+// console.log("prev", prev)
+// console.log("response--->", response)
+//           return { ...prev, suggestions: [...response.data] }
+//         })
+//         console.log("Name added Sucessfully");
+//         // toast.success("Logged in Successfully");
+//       } else {
+//         setAuth(false);
+//         console.log("Error:", parseRes);
+//         // toast.error(parseRes);
+//       }
     } catch (err) {
       console.error("Something went wrong", err.message);
     }
@@ -88,7 +98,7 @@ export default function AddName({ username, setAuth }) {
       </Button>
       <Dialog
         open={open}
-        TransitionComponent={Transition}
+        // TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"

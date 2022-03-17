@@ -7,13 +7,19 @@ const addSuggestions = (data) => {
     .then((userRes) => {
       const user_id = userRes.rows[0].id;
 
-      db.query(
-        `
-    INSERT INTO suggestions(user_id, name, sex) VALUES ($1, $2, $3) RETURNING *;
+      return db
+        .query(
+          `
+        WITH inserted AS (
+    INSERT INTO suggestions(user_id, name, sex) VALUES ($1, $2, $3) RETURNING *)
+    SELECT inserted.*, users.id as user_id, users.username as username, users.due_date as date, users.baby_sex
+    FROM inserted 
+    JOIN users 
+    ON (inserted.user_id = $1) 
+    WHERE username = $4;
   `,
-
-        [user_id, name, sex]
-      )
+          [user_id, name, sex, username]
+        )
 
         .then((res) => {
           console.log("New suggestion entry inserted:", res.rows[0]);

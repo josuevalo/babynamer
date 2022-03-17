@@ -15,7 +15,7 @@ import Divider from "@mui/material/Divider";
 
 export default function BabyName({ setAuth, isAuthenticated }) {
 
-  const [state, setState] = useState({ suggestions: [] });
+  const [suggestionState, setSuggestionState] = useState({ suggestions: [] });
 
   const { username } = useParams();
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function BabyName({ setAuth, isAuthenticated }) {
       .get(`/api/suggestions/${username}`) 
       .then((response) => {
         console.log("Suggestions: ", response.data);
-        setState({
+        setSuggestionState({
           suggestions: response.data.suggestions,
         });
       })
@@ -32,7 +32,7 @@ export default function BabyName({ setAuth, isAuthenticated }) {
       });
   }, []);
 
-  const nameSuggestion = state.suggestions.map((suggestion) => {
+  const nameSuggestion = suggestionState.suggestions.map((suggestion) => {
     return (
       <>
         <ListItem>
@@ -45,21 +45,21 @@ export default function BabyName({ setAuth, isAuthenticated }) {
   });
 
 
- const babyDueDate =  dayjs(`${state.suggestions[0] && state.suggestions[0].date}`).format('dddd, MMMM DD, YYYY')
+ const babyDueDate =  dayjs(`${suggestionState.suggestions[0] && suggestionState.suggestions[0].date}`).format('dddd, MMMM DD, YYYY')
 
   return (
     <main className="babynames">
       <VoterRegistration setAuth={setAuth} isAuthenticated={isAuthenticated} />
       <h2>
         These are the name suggestions for{" "}
-        {state.suggestions[0] && state.suggestions[0].username}'s baby{" "}
+        {suggestionState.suggestions[0] && suggestionState.suggestions[0].username}'s baby{" "}
       </h2>
       <h3>Profile</h3>
-      <h4>{state.suggestions[0] && state.suggestions[0].baby_sex}</h4>
+      <h4>{suggestionState.suggestions[0] && suggestionState.suggestions[0].baby_sex}</h4>
       <h4>{babyDueDate}</h4>
       
       <h3> Have a suggestion? </h3>
-      <AddName username={username} setAuth={setAuth}/>
+      <AddName username={username} setAuth={setAuth} setSuggestionState={setSuggestionState} />
       <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
         <nav aria-label="secondary mailbox folders">
           <List>{nameSuggestion}</List>

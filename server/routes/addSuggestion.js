@@ -11,7 +11,8 @@ router.post("/", (req, res) => {
   }
   addSuggestions(data)
     .then((addSuggestions) => {
-      res.json({ addSuggestions });
+      console.log("add suggestions", addSuggestions)
+      return res.json({ addSuggestions });
     })
     .catch(err => {
       res
