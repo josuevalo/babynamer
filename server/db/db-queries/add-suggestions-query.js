@@ -12,7 +12,7 @@ const addSuggestions = (data) => {
           `
         WITH inserted AS (
     INSERT INTO suggestions(user_id, name, sex) VALUES ($1, $2, $3) RETURNING *)
-    SELECT inserted.*, users.id as user_id, users.username as username, users.due_date as date, users.baby_sex
+    SELECT inserted.id as suggestion_id, inserted.name as name, inserted.sex as sex, users.id as user_id, users.username as username, users.due_date as date, users.baby_sex
     FROM inserted 
     JOIN users 
     ON (inserted.user_id = $1) 

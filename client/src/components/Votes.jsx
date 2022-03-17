@@ -32,11 +32,11 @@ export default function Votes({ suggestion }) {
   }, []);
 
 
-  const [incCount, setIncCount] = useState();
+  const [incCount, setIncCount] = useState(0);
   const incNum = () => {
     setIncCount(incCount + 1);
   };
-  const [decCount, setDecCount] = useState();
+  const [decCount, setDecCount] = useState(0);
   const decNum = () => {
     setDecCount(decCount + 1);
   };
