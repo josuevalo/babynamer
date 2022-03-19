@@ -6,7 +6,7 @@ import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import { pink } from "@mui/material/colors";
 import Badge from "@mui/material/Badge";
 
-export default function Votes({ suggestion }) {
+export default function Votes({ suggestion, voter }) {
 
   const fetchVotes = async () => {
     try {

@@ -8,7 +8,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-export default function VoterRegistration({ setAuth, isAuthenticated }) {
+export default function VoterRegistration({ setAuth, isAuthenticated, setVoter }) {
+  
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
@@ -37,6 +38,7 @@ export default function VoterRegistration({ setAuth, isAuthenticated }) {
       /// VOTER ID IS BELOW!!!! ///
       console.log("parge res voter reg", parseRes)
       const voterId = parseRes.voterRegResponse.id
+      setVoter(voterId)
 
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);

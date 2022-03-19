@@ -15,6 +15,8 @@ import Divider from "@mui/material/Divider";
 
 export default function BabyName({ setAuth, isAuthenticated }) {
 
+  const [voter, setVoter] = useState()
+
   const [suggestionState, setSuggestionState] = useState({ suggestions: [] });
 
   const { username } = useParams();
@@ -37,7 +39,7 @@ export default function BabyName({ setAuth, isAuthenticated }) {
       <>
         <ListItem>
           <ListItemText primary={suggestion.name} />
-          <Votes suggestion={suggestion} />
+          <Votes suggestion={suggestion} voter={voter} />
         </ListItem>
         <Divider />
       </>
@@ -49,7 +51,7 @@ export default function BabyName({ setAuth, isAuthenticated }) {
 
   return (
     <main className="babynames">
-      <VoterRegistration setAuth={setAuth} isAuthenticated={isAuthenticated} />
+      <VoterRegistration setAuth={setAuth} isAuthenticated={isAuthenticated} setVoter={setVoter} />
       <h2>
         These are the name suggestions for{" "}
         {suggestionState.suggestions[0] && suggestionState.suggestions[0].username}'s baby{" "}
