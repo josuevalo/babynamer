@@ -1,23 +1,17 @@
-import {
-  BrowserRouter,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Home from "./Home";
 import BabyName from "./BabyName";
-
+import Profile from "./Profile";
 
 export default function App() {
-
-
   const checkAuthenticated = async () => {
     try {
       const res = await fetch("/api/auth/verify", {
         method: "POST",
-        headers: { jwt_token: localStorage.token }
+        headers: { jwt_token: localStorage.token },
       });
 
       const parseRes = await res.json();
@@ -34,20 +28,16 @@ export default function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  const setAuth = boolean => {
+  const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   };
-
 
   return (
     <BrowserRouter>
       <div className="App">
         <Navbar />
         <Routes>
-
-
-
-        {/* <Switch>
+          {/* <Switch>
             <Route
               exact
               path="/login"
@@ -88,6 +78,13 @@ export default function App() {
             path="/:username"
             element={
               <BabyName setAuth={setAuth} isAuthenticated={isAuthenticated} />
+            }
+          />
+
+          <Route
+            path="/profile/:username"
+            element={
+              <Profile setAuth={setAuth} isAuthenticated={isAuthenticated} />
             }
           />
         </Routes>
