@@ -3,6 +3,8 @@ import "../App.css";
 import Fab from "@mui/material/Fab";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import { pink } from "@mui/material/colors";
 import Badge from "@mui/material/Badge";
 
@@ -81,7 +83,7 @@ export default function Votes({ suggestion, voter }) {
           size="small"
           aria-label="like"
         >
-          <ThumbUpAltIcon color="primary" />
+          <FavoriteIcon sx={{ color: pink[500] }}  />
         </Fab>
       </Badge>
       <Badge
@@ -97,7 +99,7 @@ export default function Votes({ suggestion, voter }) {
           size="small"
           aria-label="like"
         >
-          <ThumbDownAltIcon sx={{ color: pink[500] }} />
+          <HeartBrokenIcon  />
         </Fab>
       </Badge>
     </main>
