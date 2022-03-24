@@ -12,6 +12,10 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
+
 
 export default function BabyName({ setAuth, isAuthenticated }) {
   const [voter, setVoter] = useState();
@@ -62,15 +66,25 @@ export default function BabyName({ setAuth, isAuthenticated }) {
           suggestionState.suggestions[0].username}
         's baby{" "}
       </h2>
-      <h4>
-        {" "}
-        Profile
-        <br></br>
-        {suggestionState.suggestions[0] &&
-          suggestionState.suggestions[0].baby_sex}
-        <br></br>
-        {babyDueDate}
-      </h4>
+
+      <div className="profile-div">
+        <Card sx={{ minWidth: 275 }}>
+          <CardContent>
+            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          Profile
+        </Typography>
+            <Typography variant="h5" component="div">
+            Expecting: A{" "}
+              {suggestionState.suggestions[0] &&
+                suggestionState.suggestions[0].baby_sex}
+            </Typography>
+            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+              Due Date: {babyDueDate}
+              <br />
+            </Typography>
+          </CardContent>
+        </Card>
+      </div>
 
       <h3> Have a suggestion? </h3>
       <AddName
@@ -78,11 +92,13 @@ export default function BabyName({ setAuth, isAuthenticated }) {
         setAuth={setAuth}
         setSuggestionState={setSuggestionState}
       />
-      <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-        <nav aria-label="secondary mailbox folders">
-          <List>{nameSuggestion}</List>
-        </nav>
-      </Box>
+      <div className="name-suggestion">
+        <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+          <nav aria-label="secondary mailbox folders">
+            <List>{nameSuggestion}</List>
+          </nav>
+        </Box>
+      </div>
     </main>
   );
 }

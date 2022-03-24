@@ -44,3 +44,18 @@
 .select-sex {
   padding-top: 1.5em;
 }
+
+.profile-title {
+  font-weight: bold;
+}
+
+.profile-div {
+  position: relative;
+    outline: 0px;
+    margin: auto;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 24px;
+    background-color: rgb(26, 32, 39);
+}
