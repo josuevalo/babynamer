@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import Fab from "@mui/material/Fab";
-import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
-import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import { pink } from "@mui/material/colors";
@@ -77,7 +75,6 @@ export default function Votes({ suggestion, voter }) {
     <main className="votes">
       <Badge className="badgeNum" badgeContent={incCount} color="primary">
         <Fab
-          // onClick={incNum}
           name="increment"
           onClick={() => onSubmitForm("increment")}
           size="small"
@@ -95,7 +92,6 @@ export default function Votes({ suggestion, voter }) {
         <Fab
           name="decrement"
           onClick={() => onSubmitForm("decrement")}
-          // onClick={decNum}
           size="small"
           aria-label="like"
         >
