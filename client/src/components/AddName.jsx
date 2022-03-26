@@ -1,20 +1,12 @@
 import React, { useState } from "react";
 import "../App.css";
-// import Fab from "@mui/material/Fab";
-// import AddIcon from "@mui/icons-material/Add";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-// import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-// import Slide from "@mui/material/Slide";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-
-// const Transition = React.forwardRef(function Transition(props, ref) {
-//   return <Slide direction="up" ref={ref} {...props} />;
-// });
 
 const babyOptions = [
   {
@@ -68,21 +60,6 @@ export default function AddName({ username, setAuth, setSuggestionState }) {
                   return { ...prev, suggestions: [...prev.suggestions, parseRes.addSuggestions[0]] }
                 })
 
-//       if (parseRes.jwtToken) {
-//         localStorage.setItem("token", parseRes.jwtToken);
-//         setAuth(true);
-//         setSuggestionState((prev) => {
-// console.log("prev", prev)
-// console.log("response--->", response)
-//           return { ...prev, suggestions: [...response.data] }
-//         })
-//         console.log("Name added Sucessfully");
-//         // toast.success("Logged in Successfully");
-//       } else {
-//         setAuth(false);
-//         console.log("Error:", parseRes);
-//         // toast.error(parseRes);
-//       }
     } catch (err) {
       console.error("Something went wrong", err.message);
     }
@@ -90,24 +67,18 @@ export default function AddName({ username, setAuth, setSuggestionState }) {
 
   return (
     <main className="addName">
-      {/* <Fab color="success" aria-label="add" onClick={handleClickOpen}>
-        <AddIcon />
-      </Fab> */}
       <Button variant="outlined" onClick={handleClickOpen}>
         Suggest a Name
       </Button>
       <Dialog
         open={open}
-        // TransitionComponent={Transition}
+
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle>{"Add a Name!"}</DialogTitle>
         <DialogContent>
-          {/* <DialogContentText id="alert-dialog-slide-description">
-            Please enter a Name
-          </DialogContentText> */}
           <TextField
             autoFocus
             margin="dense"
@@ -120,7 +91,6 @@ export default function AddName({ username, setAuth, setSuggestionState }) {
           />
           <div className="select-sex">
             <TextField
-              // id="sex"
               name="sex"
               select
               label="Select"
