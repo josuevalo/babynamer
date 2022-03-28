@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from "react";
 import "../App.css";
 import Fab from "@mui/material/Fab";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 import { pink } from "@mui/material/colors";
 import Badge from "@mui/material/Badge";
 
 export default function Votes({ suggestion, voter }) {
-
   const fetchVotes = async () => {
     try {
-      const response = await fetch(`/api/votes/get-votes/${suggestion.suggestion_id}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `/api/votes/get-votes/${suggestion.suggestion_id}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
 
       const parseRes = await response.json();
 
-      setIncCount(Number(parseRes.upVotes))
-      setDecCount(Number(parseRes.downVotes))
+      setIncCount(Number(parseRes.upVotes));
+      setDecCount(Number(parseRes.downVotes));
       console.log("response for votes", parseRes);
     } catch (err) {
       console.error(err.message);
@@ -31,14 +33,25 @@ export default function Votes({ suggestion, voter }) {
     fetchVotes();
   }, []);
 
+  const [didVote, setDidVote] = useState(false);
 
   const [incCount, setIncCount] = useState(0);
   const incNum = () => {
-    setIncCount(incCount + 1);
+    if (!didVote) {
+      setIncCount(incCount + 1);
+      setDidVote(true);
+    } else {
+      console.log("ERROR TOO MANY VOTES");
+    }
   };
   const [decCount, setDecCount] = useState(0);
   const decNum = () => {
-    setDecCount(decCount + 1);
+    if (!didVote) {
+      setDecCount(decCount + 1);
+      setDidVote(true);
+    } else {
+      console.log("ERROR TOO MANY VOTES");
+    }
   };
 
   const onSubmitForm = async (type) => {
@@ -55,7 +68,7 @@ export default function Votes({ suggestion, voter }) {
     try {
       const body = {
         suggestionId: suggestion.suggestion_id,
-        voterId: 1,
+        voterId: voter,
         isUpVote,
       };
       console.log({ body });
@@ -80,7 +93,7 @@ export default function Votes({ suggestion, voter }) {
           size="small"
           aria-label="like"
         >
-          <FavoriteIcon sx={{ color: pink[500] }}  />
+          <FavoriteIcon sx={{ color: pink[500] }} />
         </Fab>
       </Badge>
       <Badge
@@ -95,7 +108,7 @@ export default function Votes({ suggestion, voter }) {
           size="small"
           aria-label="like"
         >
-          <HeartBrokenIcon  />
+          <HeartBrokenIcon />
         </Fab>
       </Badge>
     </main>
