@@ -16,7 +16,8 @@ export default function App() {
 
       const parseRes = await res.json();
 
-      parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
+      !!parseRes.id ? setIsAuthenticated(true) : setIsAuthenticated(false);
+      setAuthId(parseRes.id)
     } catch (err) {
       console.error(err.message);
     }
@@ -31,6 +32,8 @@ export default function App() {
   const setAuth = (boolean) => {
     setIsAuthenticated(boolean);
   };
+
+  const [ authId, setAuthId ] = useState();
 
   return (
     <BrowserRouter>
@@ -77,7 +80,7 @@ export default function App() {
           <Route
             path="/:username"
             element={
-              <BabyName setAuth={setAuth} isAuthenticated={isAuthenticated} />
+              <BabyName setAuth={setAuth} isAuthenticated={isAuthenticated} authId={authId} />
             }
           />
 

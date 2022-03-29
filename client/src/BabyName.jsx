@@ -17,12 +17,19 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 
-export default function BabyName({ setAuth, isAuthenticated }) {
+export default function BabyName({ setAuth, isAuthenticated, authId }) {
   const [voter, setVoter] = useState();
 
   const [suggestionState, setSuggestionState] = useState({ suggestions: [] });
 
   const { username } = useParams();
+
+  useEffect (() => {
+    if (isAuthenticated){
+      setVoter(authId)
+    }
+  }, [isAuthenticated, authId])
+
   useEffect(() => {
     axios
       .get(`/api/suggestions/${username}`)

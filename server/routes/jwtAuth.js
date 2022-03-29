@@ -66,7 +66,7 @@ console.log("user.rows",user.rows)
 
 router.post("/verify", authorize, (req, res) => {
   try {
-    res.json(true);
+    res.json(req.user);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
