@@ -21,16 +21,37 @@ export default function Votes({ suggestion, voter }) {
 
       const parseRes = await response.json();
 
-      setIncCount(Number(parseRes.upVotes));
-      setDecCount(Number(parseRes.downVotes));
+      setIncCount(Number(parseRes.upVotes.length));
+      setDecCount(Number(parseRes.downVotes.length));
       console.log("response for votes", parseRes);
     } catch (err) {
       console.error(err.message);
     }
   };
 
+
+  const fetchVotesToCheck = async () => {
+    try {
+      const response = await fetch(
+        `/api/votes/check-votes/${voter}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+      const parseRes = await response.json();
+      console.log("response for votescheck", parseRes);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+
   useEffect(() => {
     fetchVotes();
+    fetchVotesToCheck()
   }, []);
 
   const [didVote, setDidVote] = useState(false);

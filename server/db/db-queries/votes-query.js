@@ -24,7 +24,7 @@ const getUpVotes = (data) => {
   const { suggestionId } = data;
   return db.query(
         `
-    SELECT COUNT (*) from votes WHERE suggestion_id = $1 AND is_up_vote = true;
+    SELECT * from votes WHERE suggestion_id = $1 AND is_up_vote = true;
   `,
         [suggestionId]
       )
@@ -42,7 +42,7 @@ const getDownVotes = (data) => {
   const { suggestionId } = data;
   return db.query(
         `
-    SELECT COUNT (*) from votes WHERE suggestion_id = $1 AND is_up_vote = false;
+    SELECT * from votes WHERE suggestion_id = $1 AND is_up_vote = false;
   `,
         [suggestionId]
       )
@@ -56,6 +56,26 @@ const getDownVotes = (data) => {
     });
 };
 
+
+const checkVote = (data) => {
+  const { voterId } = data;
+  return db.query(
+        `
+        SELECT * FROM votes where voter_id = $1;
+  `,
+
+        [voterId]
+      )
+
+        .then((res) => {
+          console.log("Votes to check:", res.rows[0]);
+          return res.rows;
+        })
+        .catch((err) => {
+          console.log("DB error getting votes to check: " + err.message);
+    });
+};
+
 module.exports = {
-  addVote, getUpVotes, getDownVotes
+  addVote, getUpVotes, getDownVotes, checkVote
 };
