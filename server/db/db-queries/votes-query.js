@@ -56,26 +56,6 @@ const getDownVotes = (data) => {
     });
 };
 
-
-const checkVote = (data) => {
-  const { voterId } = data;
-  return db.query(
-        `
-        SELECT * FROM votes where voter_id = $1;
-  `,
-
-        [voterId]
-      )
-
-        .then((res) => {
-          console.log("Votes to check:", res.rows[0]);
-          return res.rows;
-        })
-        .catch((err) => {
-          console.log("DB error getting votes to check: " + err.message);
-    });
-};
-
 module.exports = {
-  addVote, getUpVotes, getDownVotes, checkVote
+  addVote, getUpVotes, getDownVotes
 };

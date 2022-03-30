@@ -4,7 +4,6 @@ const {
   addVote,
   getUpVotes,
   getDownVotes,
-  checkVote,
 } = require("../db/db-queries/votes-query");
 
 router.post("/add-vote", (req, res) => {
@@ -42,22 +41,5 @@ router.get("/get-votes/:suggestion_id", (req, res) => {
       res.status(500).json({ error: err.message });
     });
 });
-
-
-
-router.get("/check-votes/:voter_id", (req, res) => {
-  const voterId = req.params.voter_id;
-  const data = { voterId };
-  checkVote(data)
-  .then((checkVote) => {
-    res.json({ checkVote });
-  })
-  .catch(err => {
-    res
-      .status(500)
-      .json({ error: err.message });
-  });
-});
-
 
 module.exports = router;

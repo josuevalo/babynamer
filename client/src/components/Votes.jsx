@@ -29,50 +29,17 @@ export default function Votes({ suggestion, voter }) {
     }
   };
 
-
-  const fetchVotesToCheck = async () => {
-    try {
-      const response = await fetch(
-        `/api/votes/check-votes/${voter}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      );
-      const parseRes = await response.json();
-      console.log("response for votescheck", parseRes);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
-
   useEffect(() => {
     fetchVotes();
-    fetchVotesToCheck()
   }, []);
-
-  const [didVote, setDidVote] = useState(false);
 
   const [incCount, setIncCount] = useState(0);
   const incNum = () => {
-    if (!didVote) {
       setIncCount(incCount + 1);
-      setDidVote(true);
-    } else {
-      console.log("ERROR TOO MANY VOTES");
-    }
   };
   const [decCount, setDecCount] = useState(0);
   const decNum = () => {
-    if (!didVote) {
       setDecCount(decCount + 1);
-      setDidVote(true);
-    } else {
-      console.log("ERROR TOO MANY VOTES");
-    }
   };
 
   const onSubmitForm = async (type) => {
