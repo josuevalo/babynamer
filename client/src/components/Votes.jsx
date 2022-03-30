@@ -24,22 +24,33 @@ export default function Votes({ suggestion, voter }) {
       setIncCount(Number(parseRes.upVotes.length));
       setDecCount(Number(parseRes.downVotes.length));
       console.log("response for votes", parseRes);
+      console.log("VOTERRR", voter)
+      const findVoterInUpVotes = parseRes.upVotes.find(
+        ({ voter_id }) => voter_id === voter
+      );
+      const findVoterInDownVotes = parseRes.downVotes.find(
+        ({ voter_id }) => voter_id === voter
+      );
+      console.log("uppppp", findVoterInUpVotes);
+      console.log("dowwwwnnn", findVoterInDownVotes);
     } catch (err) {
       console.error(err.message);
     }
   };
 
   useEffect(() => {
-    fetchVotes();
-  }, []);
+    if (voter) {
+      fetchVotes();
+    }
+  }, [voter]);
 
   const [incCount, setIncCount] = useState(0);
   const incNum = () => {
-      setIncCount(incCount + 1);
+    setIncCount(incCount + 1);
   };
   const [decCount, setDecCount] = useState(0);
   const decNum = () => {
-      setDecCount(decCount + 1);
+    setDecCount(decCount + 1);
   };
 
   const onSubmitForm = async (type) => {
