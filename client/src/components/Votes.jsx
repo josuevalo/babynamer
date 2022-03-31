@@ -38,6 +38,8 @@ export default function Votes({ suggestion, voter }) {
     }
   };
 
+// Once the voter is checked, do not allow to vote for same suggestion again
+
   useEffect(() => {
     if (voter) {
       fetchVotes();
