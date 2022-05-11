@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../App.css";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -9,7 +10,6 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
-
 
 const babyOptions = [
   {
@@ -27,8 +27,7 @@ const babyOptions = [
 ];
 
 export default function Register({ setAuth, handleClose, open }) {
-
-
+  const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
     username: "",
@@ -40,44 +39,41 @@ export default function Register({ setAuth, handleClose, open }) {
 
   const { username, email, password, date, sex } = inputs;
 
-  const onChange = e => {
-    console.log("event", e)
+  const onChange = (e) => {
+    console.log("event", e);
     setInputs({ ...inputs, [e.target.id || e.target.name]: e.target.value });
-  }
+  };
 
-  const onSubmitForm = async e => {
+  const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
       const body = { username, email, password, due_date: date, baby_sex: sex };
-      console.log({body})
-      const response = await fetch(
-        "/api/auth/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json"
-          },
-          body: JSON.stringify(body)
-        }
-      );
+      console.log({ body });
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
       const parseRes = await response.json();
 
       if (parseRes.jwtToken) {
         localStorage.setItem("token", parseRes.jwtToken);
         setAuth(true);
-        handleClose()
-        console.log("Registration Successful!")
+        handleClose();
+        navigate(`/${username}`);
+        console.log("Registration Successful!");
         // toast.success("Register Successfully");
       } else {
         setAuth(false);
-        console.log("Error with Registration", parseRes)
+        console.log("Error with Registration", parseRes);
         // toast.error(parseRes);
       }
     } catch (err) {
       console.error(err.message);
     }
   };
-
 
   return (
     <main className="register">
