@@ -10,10 +10,12 @@ App.use(Express.json())
 
 // Routes //
 const suggestionsRoutes = require("./routes/suggestions");
+const userRoutes = require("./routes/user");
 const addSuggestionsRoutes = require("./routes/addSuggestion")
 const votesRoutes = require("./routes/votes")
 const jwtAuthRoutes = require("./routes/jwtAuth");
 
+App.use("/api/user", userRoutes);
 App.use("/api/suggestions", suggestionsRoutes);
 App.use("/api/add-suggestions", addSuggestionsRoutes);
 App.use("/api/votes", votesRoutes);

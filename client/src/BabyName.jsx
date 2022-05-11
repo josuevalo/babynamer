@@ -16,27 +16,29 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-
 export default function BabyName({ setAuth, isAuthenticated, authId }) {
   const [voter, setVoter] = useState();
 
-  const [suggestionState, setSuggestionState] = useState({ suggestions: [] });
+  const [suggestionState, setSuggestionState] = useState({ suggestions: [], user: {} });
 
   const { username } = useParams();
 
-  useEffect (() => {
-    if (isAuthenticated){
-      setVoter(authId)
+  useEffect(() => {
+    if (isAuthenticated) {
+      setVoter(authId);
     }
-  }, [isAuthenticated, authId])
+  }, [isAuthenticated, authId]);
 
   useEffect(() => {
-    axios
-      .get(`/api/suggestions/${username}`)
+    Promise.all([
+    axios.get(`/api/suggestions/${username}`),
+    axios.get(`/api/user/${username}`)])
       .then((response) => {
         console.log("Suggestions: ", response.data);
+        console.log("RESPONSE", response)
         setSuggestionState({
-          suggestions: response.data.suggestions,
+          suggestions: response[0].data.suggestions,
+          user: response[1].data.user
         });
       })
       .catch((error) => {
@@ -57,7 +59,7 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
   });
 
   const babyDueDate = dayjs(
-    `${suggestionState.suggestions[0] && suggestionState.suggestions[0].date}`
+    `${suggestionState.user && suggestionState.user.date}`
   ).format("dddd, MMMM DD, YYYY");
 
   return (
@@ -69,21 +71,25 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
       />
       <h2>
         These are the name suggestions for{" "}
-        {suggestionState.suggestions[0] &&
-          suggestionState.suggestions[0].username}
+        {suggestionState.user &&
+          suggestionState.user.username}
         's baby{" "}
       </h2>
 
       <div className="profile-div">
         <Card sx={{ minWidth: 275 }}>
           <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Profile
-        </Typography>
+            <Typography
+              sx={{ fontSize: 14 }}
+              color="text.secondary"
+              gutterBottom
+            >
+              Profile
+            </Typography>
             <Typography variant="h5" component="div">
-            Expecting: A{" "}
-              {suggestionState.suggestions[0] &&
-                suggestionState.suggestions[0].baby_sex}
+              Expecting: A{" "}
+              {suggestionState.user &&
+                suggestionState.user.sex}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
               Due Date: {babyDueDate}
