@@ -3,7 +3,7 @@ import "../App.css";
 import Fab from "@mui/material/Fab";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
-import { pink } from "@mui/material/colors";
+import { blue, blueGrey, green, pink } from "@mui/material/colors";
 import Badge from "@mui/material/Badge";
 
 export default function Votes({ suggestion, voter }) {
@@ -59,6 +59,8 @@ const [isDisabled, setIsDisabled] = useState(true)
     setDecCount(decCount + 1);
   };
 
+  const [liked, setLiked] = useState() 
+  const [disliked, setDisliked] = useState()
   const onSubmitForm = async (type) => {
     setIsDisabled(true)
     let isUpVote;
@@ -66,9 +68,11 @@ const [isDisabled, setIsDisabled] = useState(true)
     if (type === "increment") {
       isUpVote = true;
       incNum();
+      setLiked({color: pink[500]})
     } else {
       isUpVote = false;
       decNum();
+      setDisliked({color: blue[500]})
     }
 
     try {
@@ -100,7 +104,9 @@ const [isDisabled, setIsDisabled] = useState(true)
           size="small"
           aria-label="like"
         >
-          <FavoriteIcon sx={{ color: pink[500] }} />
+          <FavoriteIcon 
+          sx={liked} 
+          />
         </Fab>
       </Badge>
       <Badge
@@ -116,7 +122,9 @@ const [isDisabled, setIsDisabled] = useState(true)
           size="small"
           aria-label="like"
         >
-          <HeartBrokenIcon />
+          <HeartBrokenIcon 
+          sx={disliked}
+          />
         </Fab>
       </Badge>
     </main>
