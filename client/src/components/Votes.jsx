@@ -33,12 +33,16 @@ export default function Votes({ suggestion, voter }) {
       );
       console.log("uppppp", findVoterInUpVotes);
       console.log("dowwwwnnn", findVoterInDownVotes);
+      const hasVoted = findVoterInUpVotes || findVoterInDownVotes
+      setIsDisabled(hasVoted)
     } catch (err) {
       console.error(err.message);
     }
   };
 
 // Once the voter is checked, do not allow to vote for same suggestion again
+const [isDisabled, setIsDisabled] = useState(true)
+
 
   useEffect(() => {
     if (voter) {
@@ -56,6 +60,7 @@ export default function Votes({ suggestion, voter }) {
   };
 
   const onSubmitForm = async (type) => {
+    setIsDisabled(true)
     let isUpVote;
 
     if (type === "increment") {
@@ -89,6 +94,7 @@ export default function Votes({ suggestion, voter }) {
     <main className="votes">
       <Badge className="badgeNum" badgeContent={incCount} color="primary">
         <Fab
+          disabled={isDisabled}
           name="increment"
           onClick={() => onSubmitForm("increment")}
           size="small"
@@ -104,6 +110,7 @@ export default function Votes({ suggestion, voter }) {
         sx={{ color: pink[500] }}
       >
         <Fab
+          disabled={isDisabled}
           name="decrement"
           onClick={() => onSubmitForm("decrement")}
           size="small"
