@@ -56,6 +56,7 @@ export default function Home({ setAuth }) {
         <Login
           returningOpen={returningOpen}
           returningClickClose={returningClickClose}
+          setAuth={setAuth}
         />
       </div>
     </main>

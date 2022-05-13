@@ -5,28 +5,22 @@ import { useState, useEffect } from "react";
 import useCopy from "use-copy";
 import "./App.css";
 import Button from "@mui/material/Button";
-
 import dayjs from "dayjs";
-import Box from "@mui/material/Box";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 export default function Profile({ setAuth, isAuthenticated }) {
-
   const [userState, setUserState] = useState({ user: {} });
 
   useEffect(() => {
-    axios.get(`/api/user/${username}`)
+    axios
+      .get(`/api/user/${username}`)
       .then((response) => {
         console.log("Suggestions: ", response.data);
-        console.log("RESPONSE", response)
+        console.log("RESPONSE", response);
         setUserState({
-          user: response.data.user
+          user: response.data.user,
         });
       })
       .catch((error) => {
@@ -35,7 +29,7 @@ export default function Profile({ setAuth, isAuthenticated }) {
   }, []);
 
   const { username } = useParams();
-  // During development, the URL is local host, but will need to be update once URL is hosted //
+  // During development, the URL is local host, but will need to be updated once URL is hosted //
   const [copied, copy, setCopied] = useCopy(
     `http://localhost:3000/${username}`
   );
@@ -48,18 +42,15 @@ export default function Profile({ setAuth, isAuthenticated }) {
     }, 2500);
   };
 
-  const babyDueDate = dayjs(
-    `${userState.user && userState.user.date}`
-  ).format("dddd, MMMM DD, YYYY");
+  const babyDueDate = dayjs(`${userState.user && userState.user.date}`).format(
+    "dddd, MMMM DD, YYYY"
+  );
 
   return (
     <main className="profile">
       <h1>
-        Welcome to your profile, {" "}
-        {userState.user &&
-          userState.user.username}!
+        Welcome to your profile, {userState.user && userState.user.username}!
       </h1>
-
 
       <div className="profile-div">
         <Card sx={{ minWidth: 275 }}>
@@ -68,16 +59,22 @@ export default function Profile({ setAuth, isAuthenticated }) {
               sx={{ fontSize: 14 }}
               color="text.secondary"
               gutterBottom
-            >
-            </Typography>
+            ></Typography>
             <Typography variant="h5" component="div">
-              Expecting: A{" "}
-              {userState.user &&
-                userState.user.sex}
+              Expecting: A {userState.user && userState.user.sex}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
               Due Date: {babyDueDate}
               <br />
+              <br></br>
+              <br></br>
+              <Button variant="outlined">
+                {copied ? (
+                  "Copied to clipboard!"
+                ) : (
+                  <a onClick={copyText}>Share link</a>
+                )}
+              </Button>
             </Typography>
           </CardContent>
         </Card>
@@ -89,16 +86,7 @@ export default function Profile({ setAuth, isAuthenticated }) {
       <br></br>
       <br></br>
 
-
       <Button variant="outlined">Edit Profile</Button>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <Button variant="outlined">
-        {copied ? "Copied to clipboard!" : <a onClick={copyText}>Share link</a>}
-      </Button>
 
       <br></br>
       <br></br>
