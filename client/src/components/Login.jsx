@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../App.css";
+import { useNavigate } from 'react-router-dom';
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -16,6 +17,7 @@ export default function Login({ setAuth, returningOpen, returningClickClose }) {
   });
 
   const { username, password } = inputs;
+  const navigate = useNavigate();
 
   const onChange = e =>
     setInputs({ ...inputs, [e.target.id]: e.target.value });
@@ -42,6 +44,7 @@ export default function Login({ setAuth, returningOpen, returningClickClose }) {
         setAuth(true);
         returningClickClose()
         console.log("Logged in Sucessfully")
+        navigate(`/profile/${username}`);
         // toast.success("Logged in Successfully");
       } else {
         setAuth(false);
