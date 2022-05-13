@@ -48,9 +48,10 @@ export default function Profile({ setAuth, isAuthenticated }) {
 
   return (
     <main className="profile">
-      <h1>
-        Welcome to your profile, {userState.user && userState.user.username}!
-      </h1>
+      <h1>PROFILE</h1>
+      <h2>
+       {userState.user && userState.user.username} 
+      </h2>
 
       <div className="profile-div">
         <Card sx={{ minWidth: 275 }}>
