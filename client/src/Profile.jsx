@@ -1,10 +1,11 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import useCopy from "use-copy";
 import "./App.css";
 import Button from "@mui/material/Button";
-import useCopy from "use-copy";
 
 export default function Profile({ setAuth, isAuthenticated }) {
-  const username = "billandjill";
+  const { username } = useParams();
   // During development, the URL is local host, but will need to be update once URL is hosted //
   const [copied, copy, setCopied] = useCopy(
     `http://localhost:3000/${username}`
@@ -15,7 +16,7 @@ export default function Profile({ setAuth, isAuthenticated }) {
 
     setTimeout(() => {
       setCopied(false);
-    }, 1500);
+    }, 2500);
   };
 
   return (
