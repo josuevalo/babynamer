@@ -24,7 +24,7 @@ export default function Votes({ suggestion, voter }) {
       setIncCount(Number(parseRes.upVotes.length));
       setDecCount(Number(parseRes.downVotes.length));
       console.log("response for votes", parseRes);
-      console.log("VOTERRR", voter)
+      console.log("VOTERRR", voter);
       const findVoterInUpVotes = parseRes.upVotes.find(
         ({ voter_id }) => voter_id === voter
       );
@@ -33,16 +33,21 @@ export default function Votes({ suggestion, voter }) {
       );
       console.log("uppppp", findVoterInUpVotes);
       console.log("dowwwwnnn", findVoterInDownVotes);
-      const hasVoted = findVoterInUpVotes || findVoterInDownVotes
-      setIsDisabled(hasVoted)
+      const hasVoted = findVoterInUpVotes || findVoterInDownVotes;
+      setIsDisabled(hasVoted);
+      // Check if user has voted for that suggestion, if so, change icon colour //
+      if (findVoterInUpVotes) {
+        setLiked({ color: pink[500] });
+      } else if (findVoterInDownVotes) {
+        setDisliked({ color: blue[500] });
+      }
     } catch (err) {
       console.error(err.message);
     }
   };
 
-// Once the voter is checked, do not allow to vote for same suggestion again
-const [isDisabled, setIsDisabled] = useState(true)
-
+  // Once the voter is checked, do not allow to vote for same suggestion again
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
     if (voter) {
@@ -59,20 +64,20 @@ const [isDisabled, setIsDisabled] = useState(true)
     setDecCount(decCount + 1);
   };
 
-  const [liked, setLiked] = useState() 
-  const [disliked, setDisliked] = useState()
+  const [liked, setLiked] = useState();
+  const [disliked, setDisliked] = useState();
   const onSubmitForm = async (type) => {
-    setIsDisabled(true)
+    setIsDisabled(true);
     let isUpVote;
-
+    // Change colour of icon when user votes //
     if (type === "increment") {
       isUpVote = true;
       incNum();
-      setLiked({color: pink[500]})
+      setLiked({ color: pink[500] });
     } else {
       isUpVote = false;
       decNum();
-      setDisliked({color: blue[500]})
+      setDisliked({ color: blue[500] });
     }
 
     try {
@@ -104,9 +109,7 @@ const [isDisabled, setIsDisabled] = useState(true)
           size="small"
           aria-label="like"
         >
-          <FavoriteIcon 
-          sx={liked} 
-          />
+          <FavoriteIcon sx={liked} />
         </Fab>
       </Badge>
       <Badge
@@ -122,9 +125,7 @@ const [isDisabled, setIsDisabled] = useState(true)
           size="small"
           aria-label="like"
         >
-          <HeartBrokenIcon 
-          sx={disliked}
-          />
+          <HeartBrokenIcon sx={disliked} />
         </Fab>
       </Badge>
     </main>
