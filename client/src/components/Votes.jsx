@@ -3,7 +3,7 @@ import "../App.css";
 import Fab from "@mui/material/Fab";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
-import { blue, blueGrey, green, pink } from "@mui/material/colors";
+import { blue,  pink } from "@mui/material/colors";
 import Badge from "@mui/material/Badge";
 
 export default function Votes({ suggestion, voter }) {
