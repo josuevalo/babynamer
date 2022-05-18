@@ -15,13 +15,26 @@ import Divider from "@mui/material/Divider";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 export default function BabyName({ setAuth, isAuthenticated, authId }) {
   const [voter, setVoter] = useState();
 
-  const [suggestionState, setSuggestionState] = useState({ suggestions: [], user: {} });
+  const [suggestionState, setSuggestionState] = useState({
+    suggestions: [],
+    user: {},
+  });
 
   const { username } = useParams();
+
+  const [age, setAge] = React.useState("");
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -31,14 +44,15 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
 
   useEffect(() => {
     Promise.all([
-    axios.get(`/api/suggestions/${username}`),
-    axios.get(`/api/user/${username}`)])
+      axios.get(`/api/suggestions/${username}`),
+      axios.get(`/api/user/${username}`),
+    ])
       .then((response) => {
         console.log("Suggestions: ", response.data);
-        console.log("RESPONSE", response)
+        console.log("RESPONSE", response);
         setSuggestionState({
           suggestions: response[0].data.suggestions,
-          user: response[1].data.user
+          user: response[1].data.user,
         });
       })
       .catch((error) => {
@@ -71,8 +85,7 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
       />
       <h2>
         These are the name suggestions for{" "}
-        {suggestionState.user &&
-          suggestionState.user.username}
+        {suggestionState.user && suggestionState.user.username}
         's baby{" "}
       </h2>
 
@@ -87,9 +100,7 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
               Profile
             </Typography>
             <Typography variant="h5" component="div">
-              Expecting: A{" "}
-              {suggestionState.user &&
-                suggestionState.user.sex}
+              Expecting: A {suggestionState.user && suggestionState.user.sex}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
               Due Date: {babyDueDate}
@@ -105,6 +116,30 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
         setAuth={setAuth}
         setSuggestionState={setSuggestionState}
       />
+
+
+
+      <Box 
+      sx={{ minWidth: 120 }}
+      id="sort-box"
+      >
+        <FormControl>
+          <InputLabel id="demo-simple-select-label">Sort</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={age}
+            label="Sort"
+            onChange={handleChange}
+          >
+            <MenuItem value={10}>Most Popular</MenuItem>
+            <MenuItem value={20}>Least Popular</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+
+
+
       <div className="name-suggestion">
         <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
           <nav aria-label="secondary mailbox folders">
