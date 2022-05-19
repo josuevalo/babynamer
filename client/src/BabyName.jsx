@@ -30,10 +30,11 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
 
   const { username } = useParams();
 
-  const [age, setAge] = React.useState("");
+  const [sort, setSort] = React.useState("");
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setSort(event.target.value);
+
   };
 
   useEffect(() => {
@@ -128,7 +129,7 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            value={age}
+            value={sort}
             label="Sort"
             onChange={handleChange}
           >
