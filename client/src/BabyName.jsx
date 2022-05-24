@@ -34,6 +34,11 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
 
   const handleChange = (event) => {
     setSort(event.target.value);
+    if (event.target.value === "Most Popular") {
+
+    } else {
+      
+    }
   };
 
   useEffect(() => {
