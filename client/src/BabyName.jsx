@@ -34,7 +34,6 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
 
   const handleChange = (event) => {
     setSort(event.target.value);
-
   };
 
   useEffect(() => {
@@ -124,7 +123,7 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
       sx={{ minWidth: 120 }}
       id="sort-box"
       >
-        <FormControl>
+         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
           <InputLabel id="demo-simple-select-label">Sort</InputLabel>
           <Select
             labelId="demo-simple-select-label"
