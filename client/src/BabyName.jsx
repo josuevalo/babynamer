@@ -35,9 +35,9 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
   const handleChange = (event) => {
     setSort(event.target.value);
     if (event.target.value === "Most Popular") {
-
+// Use useEffect to build out logic to have dependancies of sort/setSort and suggestionsState //
     } else {
-      
+
     }
   };
 

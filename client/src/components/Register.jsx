@@ -95,6 +95,16 @@ export default function Register({ setAuth, handleClose, open }) {
             onChange={onChange}
           />
 
+<TextField
+            margin="dense"
+            id="name"
+            label="Name"
+            type="name"
+            fullWidth
+            variant="standard"
+            onChange={onChange}
+          />
+
           <TextField
             margin="dense"
             id="email"
