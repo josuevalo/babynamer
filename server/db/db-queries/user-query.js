@@ -2,7 +2,7 @@ const db = require('../index');
 
 const getUser = (username) => {
   return db.query(`
-  SELECT baby_sex as sex, due_date as date, email, username, id
+  SELECT baby_sex as sex, due_date as date, email, name, username, id
   FROM users
   WHERE username = $1;`,[username])
     .then((res) => {

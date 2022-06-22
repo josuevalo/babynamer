@@ -31,13 +31,14 @@ export default function Register({ setAuth, handleClose, open }) {
 
   const [inputs, setInputs] = useState({
     username: "",
+    name: "",
     email: "",
     password: "",
     date: "",
     sex: "",
   });
 
-  const { username, email, password, date, sex } = inputs;
+  const { username, name,  email, password, date, sex } = inputs;
 
   const onChange = (e) => {
     console.log("event", e);
@@ -47,7 +48,7 @@ export default function Register({ setAuth, handleClose, open }) {
   const onSubmitForm = async (e) => {
     e.preventDefault();
     try {
-      const body = { username, email, password, due_date: date, baby_sex: sex };
+      const body = { username, name, email, password, due_date: date, baby_sex: sex };
       console.log({ body });
       const response = await fetch("/api/auth/register", {
         method: "POST",

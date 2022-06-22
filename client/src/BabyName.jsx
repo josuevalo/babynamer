@@ -90,7 +90,7 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
       />
       <h2>
         These are the name suggestions for{" "}
-        {suggestionState.user && suggestionState.user.username}
+        {suggestionState.user && suggestionState.user.name}
         's baby{" "}
       </h2>
 
