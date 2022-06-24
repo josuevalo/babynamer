@@ -6,7 +6,7 @@ import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 import { blue, red } from "@mui/material/colors";
 import Badge from "@mui/material/Badge";
 
-export default function Votes({ suggestion, voter, updateSuggestion }) {
+export default function Votes({ suggestion, voter }) {
   const fetchVotes = async () => {
     try {
       const response = await fetch(
@@ -21,15 +21,8 @@ export default function Votes({ suggestion, voter, updateSuggestion }) {
 
       const parseRes = await response.json();
 
-      const upvotes = Number(parseRes.upVotes.length);
-      const downvotes = Number(parseRes.downVotes.length)
-      setIncCount(upvotes);
-      setDecCount(downvotes);
-
-      suggestion.upvotes = upvotes;
-      suggestion.downvotes = downvotes;
-      updateSuggestion(suggestion);
-
+      setIncCount(Number(parseRes.upVotes.length));
+      setDecCount(Number(parseRes.downVotes.length));
       console.log("response for votes", parseRes);
       console.log("VOTERRR", voter);
       const findVoterInUpVotes = parseRes.upVotes.find(
@@ -65,14 +58,10 @@ export default function Votes({ suggestion, voter, updateSuggestion }) {
   const [incCount, setIncCount] = useState(0);
   const incNum = () => {
     setIncCount(incCount + 1);
-    suggestion.upvotes = incCount + 1;
-    updateSuggestion(suggestion);
   };
   const [decCount, setDecCount] = useState(0);
   const decNum = () => {
     setDecCount(decCount + 1);
-    suggestion.downvotes = decCount + 1;
-    updateSuggestion(suggestion);
   };
 
   const [liked, setLiked] = useState();

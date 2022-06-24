@@ -20,7 +20,6 @@ import SortPopularity from "./components/SortPopularity";
 
 export default function BabyName({ setAuth, isAuthenticated, authId }) {
   const [voter, setVoter] = useState();
-  const [nameSuggestion, setNameSuggestion] = useState();
 
   const [filteredSex, setFilteredSex] = useState("All");
 
@@ -55,38 +54,23 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
       });
   }, []);
 
-useEffect(()=> {
   const selectedSex = filteredSex;
-  const sorted = [...suggestionState.suggestions.sort((a, b) => {
-    return b.upvotes - a.upvotes;
-  })];
-  console.log({sorted})
-  const nameSuggestion = suggestionState.suggestions.sort((a, b) => {
-    return b.upvotes - a.upvotes;
-  })
+
+  const nameSuggestion = suggestionState.suggestions
     .filter((suggestion) =>
       selectedSex === "All" ? true : suggestion.sex === selectedSex
     )
-    .map((suggestion, index) => {
-      const updateSuggestion = (updatedSuggestion) =>  {
-        const newSuggestions = suggestionState.suggestions;
-        newSuggestions[index] = updatedSuggestion;
-        console.log({newSuggestionState: { ...suggestionState, suggestions: newSuggestions}, old: { ...suggestionState}})
-        setSuggestionState({ ...suggestionState, suggestions: newSuggestions})
-      };
+    .map((suggestion) => {
       return (
         <>
           <ListItem>
             <ListItemText primary={suggestion.name} />
-            <Votes suggestion={suggestion} voter={voter} updateSuggestion={updateSuggestion} />
+            <Votes suggestion={suggestion} voter={voter} />
           </ListItem>
           <Divider />
         </>
       );
     });
-
-    setNameSuggestion(nameSuggestion);
-  }, [filteredSex, suggestionState, voter])
 
   const babyDueDate = dayjs(
     `${suggestionState.user && suggestionState.user.date}`
