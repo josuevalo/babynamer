@@ -112,11 +112,7 @@ export default function Votes({ suggestion, voter }) {
           <FavoriteIcon sx={liked} />
         </Fab>
       </Badge>
-      <Badge
-        className="badgeNum"
-        badgeContent={decCount}
-        color="primary"
-      >
+      <Badge className="badgeNum" badgeContent={decCount} color="primary">
         <Fab
           disabled={isDisabled}
           name="decrement"
