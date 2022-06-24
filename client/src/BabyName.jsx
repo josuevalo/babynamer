@@ -16,12 +16,15 @@ import Divider from "@mui/material/Divider";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import SortPopularity from "./components/SortPopularity";
+// import InputLabel from "@mui/material/InputLabel";
+// import MenuItem from "@mui/material/MenuItem";
+// import FormControl from "@mui/material/FormControl";
+// import Select from "@mui/material/Select";
 
 export default function BabyName({ setAuth, isAuthenticated, authId }) {
   const [voter, setVoter] = useState();
 
-  const [filteredSex, setFilteredSex] = useState("All");
+  const [filteredSex, setFilteredSex] = useState();
 
   const [suggestionState, setSuggestionState] = useState({
     suggestions: [],
@@ -29,6 +32,16 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
   });
 
   const { username } = useParams();
+
+  const [sort, setSort] = React.useState("");
+
+  const handleChange = (event) => {
+    setSort(event.target.value);
+    if (event.target.value === "Most Popular") {
+      // Use useEffect to build out logic to have dependancies of sort/setSort and suggestionsState //
+    } else {
+    }
+  };
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -56,21 +69,17 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
 
   const selectedSex = filteredSex;
 
-  const nameSuggestion = suggestionState.suggestions
-    .filter((suggestion) =>
-      selectedSex === "All" ? true : suggestion.sex === selectedSex
-    )
-    .map((suggestion) => {
-      return (
-        <>
-          <ListItem>
-            <ListItemText primary={suggestion.name} />
-            <Votes suggestion={suggestion} voter={voter} />
-          </ListItem>
-          <Divider />
-        </>
-      );
-    });
+  const nameSuggestion = suggestionState.suggestions.filter(suggestion => selectedSex === "All" ? true : suggestion.sex === selectedSex).map((suggestion) => {
+    return (
+      <>
+        <ListItem>
+          <ListItemText primary={suggestion.name} />
+          <Votes suggestion={suggestion} voter={voter} />
+        </ListItem>
+        <Divider />
+      </>
+    );
+  });
 
   const babyDueDate = dayjs(
     `${suggestionState.user && suggestionState.user.date}`
@@ -128,12 +137,26 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
       />
       <br />
       <hr />
+      {/* <Box sx={{ minWidth: 120 }} id="sort-box">
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <InputLabel id="demo-simple-select-label">Sort</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={sort}
+            label="Sort"
+            onChange={handleChange}
+          >
+            <MenuItem value={10}>Most Popular</MenuItem>
+            <MenuItem value={20}>Least Popular</MenuItem>
+          </Select>
+        </FormControl>
+      </Box> */}
 
       <Typography sx={{ mt: 2, mb: 2 }} component="div" color="text.secondary">
         Vote for your favourite names below!
-        <SortPopularity />
       </Typography>
-      <FilterBySex filteredSex={filteredSex} setFilteredSex={setFilteredSex} />
+      <FilterBySex setFilteredSex={setFilteredSex} />
       <div className="name-suggestion">
         <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
           <nav aria-label="secondary mailbox folders">
