@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import Votes from "./components/Votes";
 import AddName from "./components/AddName";
+import FilterBySex from "./components/FilterBySex";
 import VoterRegistration from "./components/VoterRegistration";
 import "./index.css";
 import { useState, useEffect } from "react";
@@ -15,13 +16,15 @@ import Divider from "@mui/material/Divider";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+// import InputLabel from "@mui/material/InputLabel";
+// import MenuItem from "@mui/material/MenuItem";
+// import FormControl from "@mui/material/FormControl";
+// import Select from "@mui/material/Select";
 
 export default function BabyName({ setAuth, isAuthenticated, authId }) {
   const [voter, setVoter] = useState();
+
+  const [filteredSex, setFilteredSex] = useState();
 
   const [suggestionState, setSuggestionState] = useState({
     suggestions: [],
@@ -64,7 +67,9 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
       });
   }, []);
 
-  const nameSuggestion = suggestionState.suggestions.map((suggestion) => {
+  const selectedSex = filteredSex;
+
+  const nameSuggestion = suggestionState.suggestions.filter(suggestion => selectedSex === "All" ? true : suggestion.sex === selectedSex).map((suggestion) => {
     return (
       <>
         <ListItem>
@@ -96,12 +101,22 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
               color="text.secondary"
               sx={{ mb: 2 }}
               gutterBottom
-              typography={{textDecoration:"underline rgba(0, 0, 0, 0.3) 4px"}}
+              typography={{
+                textDecoration: "underline rgba(0, 0, 0, 0.3) 4px",
+              }}
             >
-              {suggestionState.user && suggestionState.user.name && suggestionState.user.name.toUpperCase()}
+              {suggestionState.user &&
+                suggestionState.user.name &&
+                suggestionState.user.name.toUpperCase()}
             </Typography>
             <Typography sx={{ mb: 2 }} component="div">
-               EXPECTING: <b>A {suggestionState.user && suggestionState.user.sex && suggestionState.user.sex.toUpperCase()}</b>
+              EXPECTING:{" "}
+              <b>
+                A{" "}
+                {suggestionState.user &&
+                  suggestionState.user.sex &&
+                  suggestionState.user.sex.toUpperCase()}
+              </b>
             </Typography>
             <Typography sx={{ mb: 1.5 }}>
               DUE DATE: <b>{babyDueDate && babyDueDate.toUpperCase()}</b>
@@ -111,20 +126,17 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
         </Card>
       </div>
 
-      <Typography
-        variant="h6"
-        sx={{ mt:2, mb: 2 }}
-        gutterBottom
-      >
-        Have a name idea for {suggestionState.user && suggestionState.user.name}?
+      <Typography variant="h6" sx={{ mt: 2, mb: 2 }} gutterBottom>
+        Have a name idea for {suggestionState.user && suggestionState.user.name}
+        ?
       </Typography>
       <AddName
         username={username}
         setAuth={setAuth}
         setSuggestionState={setSuggestionState}
       />
-      <br/>
-      <hr/>
+      <br />
+      <hr />
       {/* <Box sx={{ minWidth: 120 }} id="sort-box">
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
           <InputLabel id="demo-simple-select-label">Sort</InputLabel>
@@ -141,10 +153,10 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
         </FormControl>
       </Box> */}
 
-      <Typography sx={{ mt: 2, mb: 2 }} component="div"  color="text.secondary">
-          Vote for your favourite names below!
+      <Typography sx={{ mt: 2, mb: 2 }} component="div" color="text.secondary">
+        Vote for your favourite names below!
       </Typography>
-
+      <FilterBySex setFilteredSex={setFilteredSex} />
       <div className="name-suggestion">
         <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
           <nav aria-label="secondary mailbox folders">
