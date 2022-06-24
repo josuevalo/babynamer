@@ -35,9 +35,8 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
   const handleChange = (event) => {
     setSort(event.target.value);
     if (event.target.value === "Most Popular") {
-// Use useEffect to build out logic to have dependancies of sort/setSort and suggestionsState //
+      // Use useEffect to build out logic to have dependancies of sort/setSort and suggestionsState //
     } else {
-
     }
   };
 
@@ -79,7 +78,7 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
 
   const babyDueDate = dayjs(
     `${suggestionState.user && suggestionState.user.date}`
-  ).format("dddd, MMMM DD, YYYY");
+  ).format("MMMM D, YYYY");
 
   return (
     <main className="babynames">
@@ -88,47 +87,46 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
         isAuthenticated={isAuthenticated}
         setVoter={setVoter}
       />
-      <h2>
-        These are the name suggestions for{" "}
-        {suggestionState.user && suggestionState.user.name}
-        's baby{" "}
-      </h2>
 
       <div className="profile-div">
         <Card sx={{ minWidth: 275 }}>
           <CardContent>
             <Typography
-              sx={{ fontSize: 14 }}
+              variant="h5"
               color="text.secondary"
+              sx={{ mb: 2 }}
               gutterBottom
+              typography={{textDecoration:"underline rgba(0, 0, 0, 0.3) 4px"}}
             >
-              Profile
+              {suggestionState.user && suggestionState.user.name && suggestionState.user.name.toUpperCase()}
             </Typography>
-            <Typography variant="h5" component="div">
-              Expecting: A {suggestionState.user && suggestionState.user.sex}
+            <Typography sx={{ mb: 2 }} component="div">
+               EXPECTING: <b>A {suggestionState.user && suggestionState.user.sex && suggestionState.user.sex.toUpperCase()}</b>
             </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              Due Date: {babyDueDate}
+            <Typography sx={{ mb: 1.5 }}>
+              DUE DATE: <b>{babyDueDate && babyDueDate.toUpperCase()}</b>
               <br />
             </Typography>
           </CardContent>
         </Card>
       </div>
 
-      <h3> Have a suggestion? </h3>
+      <Typography
+        variant="h6"
+        sx={{ mt:2, mb: 2 }}
+        gutterBottom
+      >
+        Have a name idea for {suggestionState.user && suggestionState.user.name}?
+      </Typography>
       <AddName
         username={username}
         setAuth={setAuth}
         setSuggestionState={setSuggestionState}
       />
-
-
-
-      <Box 
-      sx={{ minWidth: 120 }}
-      id="sort-box"
-      >
-         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+      <br/>
+      <hr/>
+      {/* <Box sx={{ minWidth: 120 }} id="sort-box">
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
           <InputLabel id="demo-simple-select-label">Sort</InputLabel>
           <Select
             labelId="demo-simple-select-label"
@@ -141,9 +139,11 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
             <MenuItem value={20}>Least Popular</MenuItem>
           </Select>
         </FormControl>
-      </Box>
+      </Box> */}
 
-
+      <Typography sx={{ mt: 2, mb: 2 }} component="div"  color="text.secondary">
+          Vote for your favourite names below!
+      </Typography>
 
       <div className="name-suggestion">
         <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
