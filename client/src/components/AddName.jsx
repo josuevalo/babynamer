@@ -67,7 +67,7 @@ export default function AddName({ username, setAuth, setSuggestionState }) {
 
   return (
     <main className="addName">
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="contained" onClick={handleClickOpen} sx={{ bgcolor: "cadetblue" }}>
         Suggest a Name
       </Button>
       <Dialog

@@ -3,7 +3,7 @@ import "../App.css";
 import Fab from "@mui/material/Fab";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
-import { blue,  pink } from "@mui/material/colors";
+import { blue, red } from "@mui/material/colors";
 import Badge from "@mui/material/Badge";
 
 export default function Votes({ suggestion, voter }) {
@@ -37,9 +37,9 @@ export default function Votes({ suggestion, voter }) {
       setIsDisabled(hasVoted);
       // Check if user has voted for that suggestion, if so, change icon colour //
       if (findVoterInUpVotes) {
-        setLiked({ color: pink[500] });
+        setLiked({ color: red[500] });
       } else if (findVoterInDownVotes) {
-        setDisliked({ color: blue[500] });
+        setDisliked({ color: blue[900] });
       }
     } catch (err) {
       console.error(err.message);
@@ -73,11 +73,11 @@ export default function Votes({ suggestion, voter }) {
     if (type === "increment") {
       isUpVote = true;
       incNum();
-      setLiked({ color: pink[500] });
+      setLiked({ color: red[500] });
     } else {
       isUpVote = false;
       decNum();
-      setDisliked({ color: blue[500] });
+      setDisliked({ color: blue[900] });
     }
 
     try {
@@ -116,7 +116,6 @@ export default function Votes({ suggestion, voter }) {
         className="badgeNum"
         badgeContent={decCount}
         color="primary"
-        sx={{ color: pink[500] }}
       >
         <Fab
           disabled={isDisabled}
