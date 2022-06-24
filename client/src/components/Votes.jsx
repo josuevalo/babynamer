@@ -26,9 +26,9 @@ export default function Votes({ suggestion, voter, updateSuggestion }) {
       setIncCount(upvotes);
       setDecCount(downvotes);
 
-      suggestion.upvotes = upvotes;
-      suggestion.downvotes = downvotes;
-      updateSuggestion(suggestion);
+      // suggestion.upvotes = upvotes;
+      // suggestion.downvotes = downvotes;
+      // updateSuggestion(suggestion);
 
       console.log("response for votes", parseRes);
       console.log("VOTERRR", voter);
@@ -65,14 +65,14 @@ export default function Votes({ suggestion, voter, updateSuggestion }) {
   const [incCount, setIncCount] = useState(0);
   const incNum = () => {
     setIncCount(incCount + 1);
-    suggestion.upvotes = incCount + 1;
-    updateSuggestion(suggestion);
+    // suggestion.upvotes = incCount + 1;
+    // updateSuggestion(suggestion);
   };
   const [decCount, setDecCount] = useState(0);
   const decNum = () => {
     setDecCount(decCount + 1);
-    suggestion.downvotes = decCount + 1;
-    updateSuggestion(suggestion);
+    // suggestion.downvotes = decCount + 1;
+    // updateSuggestion(suggestion);
   };
 
   const [liked, setLiked] = useState();

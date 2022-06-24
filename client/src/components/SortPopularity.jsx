@@ -5,16 +5,15 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Box from "@mui/material/Box";
 
-export default function SortPopularity() {
+export default function SortPopularity({popularity, setPopularity}) {
 
   const [sort, setSort] = React.useState("");
 
   const handleChange = (event) => {
     setSort(event.target.value);
-    if (event.target.value === "Most Popular") {
-      // Use useEffect to build out logic to have dependancies of sort/setSort and suggestionsState //
-    } else {
-    }
+      setPopularity(event.target.value)
+      console.log("SETPOPULARITY", popularity)
+      console.log("e.t.v", event)
   };
 
   return (
@@ -28,8 +27,8 @@ export default function SortPopularity() {
         label="Sort"
         onChange={handleChange}
       >
-        <MenuItem value={10}>Most Popular</MenuItem>
-        <MenuItem value={20}>Least Popular</MenuItem>
+        <MenuItem value={"Most Popular"}>Most Popular</MenuItem>
+        <MenuItem value={"Least Popular"}>Least Popular</MenuItem>
       </Select>
     </FormControl>
   </Box>
