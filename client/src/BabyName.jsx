@@ -24,7 +24,7 @@ import Typography from "@mui/material/Typography";
 export default function BabyName({ setAuth, isAuthenticated, authId }) {
   const [voter, setVoter] = useState();
 
-  const [filteredSex, setFilteredSex] = useState();
+  const [filteredSex, setFilteredSex] = useState("All");
 
   const [suggestionState, setSuggestionState] = useState({
     suggestions: [],

@@ -38,8 +38,13 @@ export default function Votes({ suggestion, voter }) {
       // Check if user has voted for that suggestion, if so, change icon colour //
       if (findVoterInUpVotes) {
         setLiked({ color: red[500] });
+        setDisliked(null);
       } else if (findVoterInDownVotes) {
         setDisliked({ color: blue[900] });
+        setLiked(null);
+      } else {
+        setLiked(null);
+        setDisliked(null)
       }
     } catch (err) {
       console.error(err.message);
@@ -53,7 +58,7 @@ export default function Votes({ suggestion, voter }) {
     if (voter) {
       fetchVotes();
     }
-  }, [voter]);
+  }, [voter, suggestion]);
 
   const [incCount, setIncCount] = useState(0);
   const incNum = () => {
