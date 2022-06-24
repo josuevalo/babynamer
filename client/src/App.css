@@ -10,10 +10,6 @@ body {
   font-family: cursive;
 }
 
-.profile-div {
-  background-color: #313131;
-}
-
 .App {
   text-align: center;
 }
@@ -73,7 +69,7 @@ body {
   -webkit-box-pack: center;
   justify-content: center;
   padding: 24px;
-  background-color: rgb(26, 32, 39);
+  background-color: 	#383838;
 }
 
 #sort-box {
