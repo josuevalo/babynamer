@@ -1,0 +1,13 @@
+{
+  "name": "babynamer",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node server/index.js",
+    "heroku-postbuild": "cd server && npm install && cd ../client && npm install && npm run build"
+  },
+  "author": "Josue Arevalo",
+  "license": "ISC",
+  "dependencies": {
+  }
+}
