@@ -2,6 +2,7 @@
 require('dotenv').config({path: '../.env'});
 
 // other dependencies
+const path = require('path');
 const fs = require('fs');
 const chalk = require('chalk');
 const Client = require('pg-native');
@@ -17,6 +18,7 @@ const client = new Client();
 // Loads the schema files from db/schema
 const runSchemaFiles = function () {
   console.log(chalk.cyan(`-> Loading Schema Files ...`));
+  console.log({ path })
   const schemaFilenames = fs.readdirSync('../db/schema');
 
   for (const fn of schemaFilenames) {
