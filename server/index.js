@@ -21,8 +21,10 @@ App.use("/api/add-suggestions", addSuggestionsRoutes);
 App.use("/api/votes", votesRoutes);
 App.use("/api/auth", jwtAuthRoutes);
 
-App.listen(5000, () => {
-  console.log("Server is listening on port 5000 🎉 ");
+const port = process.env.PORT | 5000;
+
+App.listen(port, () => {
+  console.log(`Server is listening on port ${port} 🎉 `);
 });
 
 
