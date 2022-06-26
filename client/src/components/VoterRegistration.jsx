@@ -78,8 +78,7 @@ export default function VoterRegistration({ setAuth, isAuthenticated, setVoter }
         <DialogTitle>WELCOME!</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Please register so we can keep track your suggestions and votes for
-            you!
+            Please register so we can keep track of your name suggestions and votes!
             <br></br>
             If you have already registered, you can use the same form to login.
           </DialogContentText>
