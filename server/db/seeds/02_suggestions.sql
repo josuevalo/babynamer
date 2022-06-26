@@ -9,4 +9,4 @@ VALUES (1, 'Charlie', 'Boy'),
 (3, 'Kate', 'Girl'),
 (3, 'Felix', 'Boy'),
 (3, 'Ashley', 'Girl'),
-(3, 'Joe', 'Boy')
+(3, 'Joe', 'Boy');
