@@ -18,7 +18,7 @@ const client = new Client();
 // Loads the schema files from db/schema
 const runSchemaFiles = function () {
   console.log(chalk.cyan(`-> Loading Schema Files ...`));
-  console.log({ path })
+  console.log(path.resolve(__dirname), path.resolve(__filename))
   const schemaFilenames = fs.readdirSync('../db/schema');
 
   for (const fn of schemaFilenames) {
