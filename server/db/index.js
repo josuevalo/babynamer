@@ -6,14 +6,16 @@ require('dotenv').config({
 let dbParams = {};
 if (process.env.DATABASE_URL) {
   dbParams.connectionString = process.env.DATABASE_URL;
+  console.log(`Connecting with connection string ${process.env.DATABASE_URL}`)
   dbParams.ssl = { rejectUnauthorized: false };
+  dbParams.jwtSecret = process.env.JWT_SECRET;
 } else {
   dbParams = {
-    user: process.env.PG_USER,
-    password: process.env.PG_PASSWORD,
-    host: process.env.PG_HOST,
-    port: process.env.PG_PORT,
-    database: process.env.PG_DATABASE,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
     jwtSecret: process.env.JWT_SECRET
   };
 }
