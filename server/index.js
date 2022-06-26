@@ -7,7 +7,7 @@ const App = Express();
 const cors = require('cors');
 // const BodyParser = require('body-parser');
 const path = require('path');
-const port = process.env.PORT | 5000;
+const port = process.env.PORT || 5000;
 
 if (process.env.NODE_ENV === "production") {
   console.log('using production build');
