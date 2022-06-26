@@ -13,8 +13,8 @@ if (process.env.NODE_ENV === "production") {
 
 // Middleware //
 
-App.use(cors());
-App.use(Express.json())
+// App.use(cors());
+// App.use(Express.json())
 
 // Express Configuration
 App.use(BodyParser.urlencoded({
