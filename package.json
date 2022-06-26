@@ -2,12 +2,13 @@
   "name": "babynamer",
   "version": "1.0.0",
   "description": "",
+  "main": "server/index.js",
   "engines": {
     "node": "12.22.5",
     "npm": "6.14.14"
   },
   "scripts": {
-    "start": "node server/bin/resetdb.js && node server/index.js",
+    "start": "node server/index.js",
     "heroku-postbuild": "cd server && npm install && cd ../client && npm install && npm run build"
   },
   "author": "Josue Arevalo",
