@@ -158,7 +158,7 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
       </Typography>
       <FilterBySex setFilteredSex={setFilteredSex} />
       <div className="name-suggestion">
-        <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+        <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
           <nav aria-label="secondary mailbox folders">
             <List>{nameSuggestion}</List>
           </nav>
