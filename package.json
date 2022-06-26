@@ -2,6 +2,10 @@
   "name": "babynamer",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "12.22.5",
+    "npm": "6.14.14"
+  },
   "scripts": {
     "start": "node server/index.js",
     "postinstall": "cd server && npm install && node bin/resetdb.js && cd ../client && npm install && npm run build"
