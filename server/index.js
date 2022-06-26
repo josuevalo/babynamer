@@ -7,7 +7,7 @@ const App = Express();
 const cors = require('cors');
 const BodyParser = require('body-parser');
 const path = require('path');
-const port = process.env.NODE_PORT | 5000;
+const port = process.env.PORT | 5000;
 
 if (process.env.NODE_ENV === "production") {
   App.use(Express.static(path.resolve(__dirname, '../client/build')));
