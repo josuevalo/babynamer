@@ -69,17 +69,27 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
 
   const selectedSex = filteredSex;
 
-  const nameSuggestion = suggestionState.suggestions.filter(suggestion => selectedSex === "All" ? true : suggestion.sex === selectedSex).map((suggestion) => {
-    return (
-      <>
-        <ListItem>
-          <ListItemText primary={suggestion.name} />
-          <Votes suggestion={suggestion} voter={voter} />
-        </ListItem>
-        <Divider />
-      </>
-    );
-  });
+  const nameSuggestion = suggestionState.suggestions
+    .filter(
+      (suggestion, index) =>
+        suggestionState.suggestions.findIndex(
+          ({ name }) => name === suggestion.name
+        ) === index
+    )
+    .filter((suggestion) =>
+      selectedSex === "All" ? true : suggestion.sex === selectedSex
+    )
+    .map((suggestion) => {
+      return (
+        <>
+          <ListItem>
+            <ListItemText primary={suggestion.name} />
+            <Votes suggestion={suggestion} voter={voter} />
+          </ListItem>
+          <Divider />
+        </>
+      );
+    });
 
   const babyDueDate = dayjs(
     `${suggestionState.user && suggestionState.user.date}`
