@@ -7,8 +7,8 @@
     "npm": "6.14.14"
   },
   "scripts": {
-    "start": "cd server && npm install && node bin/resetdb.js && node index.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "start": "node server/index.js",
+    "heroku-postbuild": "cd server && npm install && cd ../client && npm install && npm run build"
   },
   "author": "Josue Arevalo",
   "license": "ISC",
