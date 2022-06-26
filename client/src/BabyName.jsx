@@ -8,6 +8,7 @@ import "./index.css";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
+import timezone from 'dayjs/plugin/timezone';
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -91,6 +92,8 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
       );
     });
 
+    dayjs.extend(timezone);
+  dayjs.tz.setDefault("America/Vancouver");
   const babyDueDate = dayjs(
     `${suggestionState.user && suggestionState.user.date}`
   ).format("MMMM D, YYYY");
