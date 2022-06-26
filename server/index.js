@@ -39,7 +39,7 @@ App.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 
-App.listen(port, () => {
+App.listen(port, '0.0.0.0', () => {
   console.log(`Server is listening on port ${port} 🎉 `);
 });
 
