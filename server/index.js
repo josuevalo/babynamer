@@ -5,11 +5,12 @@ require('dotenv').config({
 const Express = require("express");
 const App = Express();
 const cors = require('cors');
-const BodyParser = require('body-parser');
+// const BodyParser = require('body-parser');
 const path = require('path');
 const port = process.env.PORT | 5000;
 
 if (process.env.NODE_ENV === "production") {
+  console.log('using production build');
   App.use(Express.static(path.resolve(__dirname, '../client/build')));
 } else {
   App.use(Express.static('public'));
@@ -17,14 +18,14 @@ if (process.env.NODE_ENV === "production") {
 
 // Middleware //
 
-// App.use(cors());
-// App.use(Express.json())
+App.use(cors());
+App.use(Express.json())
 
 // Express Configuration
-App.use(BodyParser.urlencoded({
-  extended: false
-}));
-App.use(BodyParser.json());
+// App.use(BodyParser.urlencoded({
+//   extended: false
+// }));
+// App.use(BodyParser.json());
 
 // Routes //
 const suggestionsRoutes = require("./routes/suggestions");
@@ -40,6 +41,7 @@ App.use("/api/votes", votesRoutes);
 App.use("/api/auth", jwtAuthRoutes);
 
 App.get('*', (req, res) => {
+  console.log('getting client build index.html')
   res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 
