@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "node server/index.js",
-    "heroku-postbuild": "cd server && npm install && cd ../client && npm install && npm run build"
+    "heroku-postbuild": "cd server && npm install && node bin/resetdb.js && cd ../client && npm install && npm run build"
   },
   "author": "Josue Arevalo",
   "license": "ISC",
