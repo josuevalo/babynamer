@@ -95,7 +95,7 @@ export default function BabyName({ setAuth, isAuthenticated, authId }) {
   dayjs.extend(utc);
   const babyDueDate = dayjs(
     `${suggestionState.user && suggestionState.user.date}`
-  ).utc(true).format("MMMM D, YYYY");
+  ).utc(false).format("MMMM D, YYYY");
 
   return (
     <main className="babynames">
